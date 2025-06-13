@@ -1,0 +1,22 @@
+import { Dimensions, StyleSheet } from "react-native";
+
+const screenHeight = Dimensions.get('screen').height;
+const screenWidth = Dimensions.get('screen').width;
+
+const styles = StyleSheet.create({
+    dataBoxView: {
+        backgroundColor: '#aaaaaa',
+        height: screenHeight * .25,
+        width: '35%',
+        margin: 5,
+        borderRadius: 10
+    },
+
+    dataBoxHorizontalContainerView: {
+        flexDirection: 'row',
+        alignContent: 'space-between',
+        justifyContent: 'space-around'
+    }
+});
+
+export default styles;
