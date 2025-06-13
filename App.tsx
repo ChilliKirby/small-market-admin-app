@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootTabParamList } from "./scenes/NavigationTypes";
 
-import HomeScene from "./scenes/HomeScene";
+import HomeScene from "./scenes/HomeScene/HomeScene";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 export default function App() {
