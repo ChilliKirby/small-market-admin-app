@@ -9,13 +9,15 @@ const styles = StyleSheet.create({
         height: screenHeight * .25,
         width: '35%',
         margin: 5,
-        borderRadius: 10
+        borderRadius: 10,
+        alignItems: 'center'
     },
 
     dataBoxHorizontalContainerView: {
         flexDirection: 'row',
         alignContent: 'space-between',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        margin: 15
     }
 });
 

@@ -1,8 +1,9 @@
 import { Text, View } from "react-native";
 import homeSceneStyles from './HomeSceneStyles';
 
-type dataBox = {
-
+interface dataBox {
+    title: string,
+    
 } 
 const DataBox = () => {
     return (
