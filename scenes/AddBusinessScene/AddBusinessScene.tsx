@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
-import { ScrollView, Text, TextInput, View } from "react-native";
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as Yup from "yup";
 
@@ -32,6 +32,10 @@ const formSchema = Yup.object({
     info: Yup.string().max(500, "Info must not exceed 500 characters").default(""),
 });
 
+const onSubmit = (data: FormData) => {
+    console.log("test submit");
+}
+
 const AddBusinessScene = () => {
 
     const {
@@ -48,29 +52,64 @@ const AddBusinessScene = () => {
         <SafeAreaProvider>
             <SafeAreaView>
                 <View style={[styles.mainView, { alignItems: 'center' }]}>
-                    <Text style={[ styles.fontLarge, {marginBottom: 50 }]} >
+                    <Text style={[styles.fontLarge, { margin: 50 }]} >
                         Add a new business
                     </Text>
 
-                     <ScrollView>
-                    {['name', 'email', 'phone', 'address', 'website', 'info'].map( (field) => (
-                        <View key={ field } style={ addBusinessSceneStyles.inputContainer } >
-                            <Controller
-                                name={field as keyof FormData}
-                                control={ control }
-                                render={({field: { onChange, value, onBlur } }) => (
-                                    <TextInput
-                                        style={ addBusinessSceneStyles.input }
-                                        placeholder={ field }
-                                        onChangeText={ onChange }
-                                        onBlur={ onBlur }
-                                        value={ value }
+                    <ScrollView style={{ flexGrow: 1 }}>
+                        {['name', 'email', 'phone', 'address', 'website'].map((field) => (
+                            <View key={field}>
+                                <Text style={styles.fontMedium}> {field} </Text>
+                                <View key={field} style={addBusinessSceneStyles.inputContainerView} >
+                                    <Controller
+                                        name={field as keyof FormData}
+                                        control={control}
+                                        render={({ field: { onChange, value, onBlur } }) => (
+                                            <TextInput
+                                                style={addBusinessSceneStyles.input}
+                                                placeholder={field}
+                                                onChangeText={onChange}
+                                                onBlur={onBlur}
+                                                value={value}
+                                            />
+                                        )}
                                     />
+                                </View>
+
+                                {errors[field as keyof FormData] && (
+                                    <Text style={[styles.fontErrorRegular, { marginBottom: 20 }]}>
+                                        {errors[field as keyof FormData]?.message}
+                                    </Text>
+                                )}
+                            </View>
+                        ))}
+
+                        <Text style={styles.fontMedium}> Business info </Text>
+                        <View style={addBusinessSceneStyles.inputContainerLargeView} >
+                            <Controller
+                                name="info"
+                                control={control}
+                                render={({ field: { onChange, onBlur, value } }) => (
+                                    <TextInput
+                                        style={addBusinessSceneStyles.input}
+                                        placeholder="Business info"
+                                        onChangeText={onChange}
+                                        onBlur={onBlur}
+                                        value={value}
+                                    />
+
                                 )}
                             />
                         </View>
-                    ))}
-                </ScrollView>
+
+                        <TouchableOpacity style={ addBusinessSceneStyles.buttonView} onPress={ handleSubmit(onSubmit) }>
+                            <View>
+                            <Text style={ styles.fontMedium }>
+                                Submit
+                            </Text>
+                            </View>
+                        </TouchableOpacity>
+                    </ScrollView>
                 </View>
             </SafeAreaView>
         </SafeAreaProvider>

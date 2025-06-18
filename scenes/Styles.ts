@@ -27,6 +27,10 @@ const styles = StyleSheet.create({
     fontRegular: {
         fontSize: 18,
         color: 'white',
+    },
+    fontErrorRegular: {
+        fontSize: 18,
+        color: 'red',
     }
 
 });
