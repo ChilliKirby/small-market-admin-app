@@ -32,6 +32,10 @@ const formSchema = Yup.object({
     info: Yup.string().max(500, "Info must not exceed 500 characters").default(""),
 });
 
+/**
+ * 
+ * @param data 
+ */
 const onSubmit = (data: FormData) => {
     console.log("test submit");
 }
@@ -45,8 +49,6 @@ const AddBusinessScene = () => {
     } = useForm<FormData>({
         resolver: yupResolver(formSchema),
     });
-
-
 
     return (
         <SafeAreaProvider>
