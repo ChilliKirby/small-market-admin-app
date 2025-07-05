@@ -12,6 +12,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.jessepeachcharlie.smallmarketadminapp",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -19,7 +20,6 @@
       "edgeToEdgeEnabled": true
     },
     "web": {
-      
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
@@ -35,6 +35,11 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6438afec-b3d9-411f-84db-f34b2f27499f"
+      }
     }
   }
 }
