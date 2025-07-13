@@ -8,22 +8,24 @@ const GoogleSignInButton = () => {
         try {
             await GoogleSignin.hasPlayServices();
             const userInfo: SignInResponse = await GoogleSignin.signIn();
-            
 
-            axios.post('http://192.168.86.123:3001/auth/adminlogin',{
+
+            const response = axios.post('http://192.168.86.123:3001/auth/adminlogin', {
                 idToken: userInfo.data?.idToken,
             })
                 .then(response => {
-                    
+
                     console.log(response.data);
                 })
                 .catch(error => {
-                   
+
                     console.log(error);
                 });
 
-        } catch (error) {
             
+
+        } catch (error) {
+
             console.error('Google Sign-In error:', error);
         }
     }
