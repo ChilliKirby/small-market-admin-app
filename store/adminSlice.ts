@@ -1,22 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface AdminState {
-    token: string | null;
+    name: string | '';
+    token: string | '';
 };
 
 const initialState: AdminState = {
-    token: null,
+    name:  '',
+    token: '',
 };
 
 export const adminSlice = createSlice({
     name: 'admin',
     initialState,
     reducers: {
-        setToken: (state, action: PayloadAction<string | null>) => {
-            state.token = action.payload;
+        setUser: (state, action: PayloadAction<AdminState>) => {
+            state.name = action.payload.name;
+            state.token = action.payload.token;
         },
     }
 });
 
-export const { setToken } = adminSlice.actions;
+export const { setUser } = adminSlice.actions;
 export default adminSlice.reducer;

@@ -1,8 +1,15 @@
 import { GoogleSignin, GoogleSigninButton, SignInResponse } from '@react-native-google-signin/google-signin';
 import axios from 'axios';
 import { View } from "react-native";
+import { useDispatch } from 'react-redux';
+
+import { setUser } from '@/store/adminSlice';
+import { AppDispatch } from '../../../store/store';
+
 
 const GoogleSignInButton = () => {
+
+    const dispatch = useDispatch<AppDispatch>();
 
     const signIn = async () => {
         try {
@@ -14,18 +21,13 @@ const GoogleSignInButton = () => {
                 idToken: userInfo.data?.idToken,
             })
                 .then(response => {
-
+                    dispatch(setUser({ name: response.data.name, token: response.data.token}));
                     console.log(response.data);
                 })
                 .catch(error => {
-
                     console.log(error);
-                });
-
-            
-
+                });      
         } catch (error) {
-
             console.error('Google Sign-In error:', error);
         }
     }
