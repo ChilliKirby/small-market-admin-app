@@ -21,7 +21,7 @@ const LoginScene = ({navigation}: props) => {
         if(token) {
             navigation.navigate('HomeScene');
         }
-    });
+    },[token]);
 
     return (
         <SafeAreaProvider>

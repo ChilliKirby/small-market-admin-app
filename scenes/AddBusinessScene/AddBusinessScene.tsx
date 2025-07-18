@@ -1,9 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { Controller, useForm } from "react-hook-form";
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as Yup from "yup";
 
+import { RootTabParamList } from "../NavigationTypes";
 import styles from "../Styles";
 import addBusinessSceneStyles from './AddBusinessSceneStyles';
 
@@ -40,7 +42,8 @@ const onSubmit = (data: FormData) => {
     console.log("test submit");
 }
 
-const AddBusinessScene = () => {
+type props = BottomTabScreenProps<RootTabParamList, 'AddBusinessScene'>
+const AddBusinessScene = ({navigation}: props) => {
 
     const {
         control,

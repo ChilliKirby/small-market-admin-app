@@ -10,6 +10,7 @@ import homeSceneStyles from './HomeSceneStyles';
 type props = BottomTabScreenProps<RootTabParamList, 'HomeScene'>;
 const HomeScene = ({ navigation, route }: props) => {
 
+   
     return (
         <SafeAreaProvider >
             <SafeAreaView style={styles.safeAreaView}>
