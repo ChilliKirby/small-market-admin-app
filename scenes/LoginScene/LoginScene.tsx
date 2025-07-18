@@ -1,19 +1,32 @@
-import { Text, View } from 'react-native';
+import { useEffect } from 'react';
+import { View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
 
 
 import { RootState } from '@/store/store';
-import { useSelector } from 'react-redux';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { RootTabParamList } from '../NavigationTypes';
 import styles from '../Styles';
 import GoogleSignInButton from './Components/GoogleSignInButton';
 
-const LoginScene = () => {
-    const x = useSelector((state: RootState) => state.admin.name);
+type props = BottomTabScreenProps<RootTabParamList, 'LoginScene'>;
+const LoginScene = ({navigation}: props) => {
+
+    //Grab token from redux store
+    const token = useSelector((state: RootState) => state.admin.name);
+
+    //Navigate to Home Scene if login is successfull.
+    useEffect(() => {
+        if(token) {
+            navigation.navigate('HomeScene');
+        }
+    });
+
     return (
         <SafeAreaProvider>
             <SafeAreaView>
                 <View style={styles.safeAreaView}>
-                    <Text>{x}</Text>
                     <GoogleSignInButton />
                 </View>
             </SafeAreaView>
