@@ -1,5 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -45,6 +46,8 @@ const onSubmit = (data: FormData) => {
 type props = BottomTabScreenProps<RootTabParamList, 'AddBusinessScene'>
 const AddBusinessScene = ({navigation}: props) => {
 
+    const [imageUri, setImageUri] = useState('');
+
     const {
         control,
         handleSubmit,
@@ -52,6 +55,13 @@ const AddBusinessScene = ({navigation}: props) => {
     } = useForm<FormData>({
         resolver: yupResolver(formSchema),
     });
+
+    /**
+     * Allow user to add image from gallery
+     */
+    const pickImage = () => {
+
+    }
 
     return (
         <SafeAreaProvider>
