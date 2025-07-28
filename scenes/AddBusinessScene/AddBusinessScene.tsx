@@ -1,3 +1,4 @@
+import { Feather } from '@expo/vector-icons';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { useState } from "react";
@@ -6,6 +7,7 @@ import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-nativ
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as Yup from "yup";
 
+import { pickImage } from '@/Utilities/pickImage';
 import { RootTabParamList } from "../NavigationTypes";
 import styles from "../Styles";
 import addBusinessSceneStyles from './AddBusinessSceneStyles';
@@ -59,8 +61,13 @@ const AddBusinessScene = ({navigation}: props) => {
     /**
      * Allow user to add image from gallery
      */
-    const pickImage = () => {
-
+    const selectImage = async() => {
+        try{       
+        const image = await pickImage();
+       console.log(image);
+        } catch(error){
+            console.log(error);
+        }
     }
 
     return (
@@ -115,6 +122,14 @@ const AddBusinessScene = ({navigation}: props) => {
 
                                 )}
                             />
+                        </View>
+
+                        <Text style={styles.fontMedium}> Main Business Image </Text>
+
+                        <View style={{ margin: 15}}>
+                        <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={ selectImage }>
+                            <Feather name="camera" size={28} color="#007AFF"/>
+                        </TouchableOpacity>
                         </View>
 
                         <TouchableOpacity style={ addBusinessSceneStyles.buttonView} onPress={ handleSubmit(onSubmit) }>

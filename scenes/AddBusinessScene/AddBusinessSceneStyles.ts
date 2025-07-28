@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#2196F3'
     },
+    iconButtonView:{
+        height: 60,
+        width: 60
+    },
     error: {
         color: 'red',
         marginTop: 5,

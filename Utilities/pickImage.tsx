@@ -14,6 +14,7 @@ export const pickImage = async (): Promise<string | null> => {
 
     return new Promise((resolve, reject) => {
         launchImageLibrary(options, (response) => {
+            console.log("in promise")
             if (response.didCancel) {
                 resolve(null);
             } else if (response.errorCode) {
@@ -31,6 +32,7 @@ export const pickImage = async (): Promise<string | null> => {
                 }
 
             }
+            console.log("in promise")
         })
     })
 }
