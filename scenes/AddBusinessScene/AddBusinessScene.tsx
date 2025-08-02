@@ -7,6 +7,7 @@ import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-nativ
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as Yup from "yup";
 
+import addBusiness from '@/Controller/addBusiness';
 import { pickImage } from '@/Utilities/pickImage';
 import { RootTabParamList } from "../NavigationTypes";
 import styles from "../Styles";
@@ -41,8 +42,10 @@ const formSchema = Yup.object({
  * 
  * @param data 
  */
-const onSubmit = (data: FormData) => {
-    console.log("test submit");
+const onSubmit = async(data: FormData) => {
+    console.log(data);
+
+    const response = addBusiness(data.name, data.email, data.phone, data.address, data.website, data.info);
 }
 
 type props = BottomTabScreenProps<RootTabParamList, 'AddBusinessScene'>
@@ -64,7 +67,11 @@ const AddBusinessScene = ({navigation}: props) => {
     const selectImage = async() => {
         try{       
         const image = await pickImage();
-       console.log(image);
+        if(!image) return;
+
+        const response = await fetch(image);
+        const blob = await response.blob();
+        
         } catch(error){
             console.log(error);
         }
