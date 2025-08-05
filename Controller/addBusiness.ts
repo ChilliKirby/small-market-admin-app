@@ -1,9 +1,8 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
 
-import { RootState } from "@/store/store";
 
 type BusiniessData = {
+    token: string,
     name: string;
     email?: string;
     phone?: string;
@@ -12,13 +11,12 @@ type BusiniessData = {
     info?: string;
 }
 
-const addBusiness = async({name, email, phone, address, website, info}:BusiniessData) => {
-
-    const user = useSelector((state: RootState) => state.admin)
-
+const addBusiness = async({token, name, email, phone, address, website, info}:BusiniessData) => {
+    console.log("her");
+    
     try{
-        const response = axios.post('http://192.168.86.123:3001/auth/adminlogin', {
-            jwt: user.token,
+        const response = axios.post('http://192.168.86.123:3001/business/addbusiness', {
+            jwt: token,
             name,
             email,
             phone,
@@ -26,9 +24,14 @@ const addBusiness = async({name, email, phone, address, website, info}:Businiess
             website,
             info
         }
-        )
+        ).then(response => {
+                            console.log(response.data);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });      
     } catch(error){
-        console.log(error);
+        console.log("error");
     }
 }
 

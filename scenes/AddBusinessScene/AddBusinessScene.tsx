@@ -8,10 +8,13 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as Yup from "yup";
 
 import addBusiness from '@/Controller/addBusiness';
+import { RootState } from '@/store/store';
 import { pickImage } from '@/Utilities/pickImage';
+import { useSelector } from 'react-redux';
 import { RootTabParamList } from "../NavigationTypes";
 import styles from "../Styles";
 import addBusinessSceneStyles from './AddBusinessSceneStyles';
+
 
 type FormData = {
     name: string;
@@ -42,14 +45,25 @@ const formSchema = Yup.object({
  * 
  * @param data 
  */
-const onSubmit = async(data: FormData) => {
-    console.log(data);
-
-    const response = addBusiness(data.name, data.email, data.phone, data.address, data.website, data.info);
+const onSubmit = async(token:string, data: FormData) => {
+    
+    const response = await addBusiness({
+        //admin user info
+        token: token,
+        //Business info
+        name: data.name, 
+        email: data.email, 
+        phone: data.phone, 
+        address: data.address, 
+        website: data.website, 
+        info: data.info});
 }
 
 type props = BottomTabScreenProps<RootTabParamList, 'AddBusinessScene'>
+
 const AddBusinessScene = ({navigation}: props) => {
+
+    const user = useSelector((state: RootState) => state.admin);
 
     const [imageUri, setImageUri] = useState('');
 
@@ -75,7 +89,8 @@ const AddBusinessScene = ({navigation}: props) => {
         } catch(error){
             console.log(error);
         }
-    }
+    };
+
 
     return (
         <SafeAreaProvider>
@@ -139,7 +154,7 @@ const AddBusinessScene = ({navigation}: props) => {
                         </TouchableOpacity>
                         </View>
 
-                        <TouchableOpacity style={ addBusinessSceneStyles.buttonView} onPress={ handleSubmit(onSubmit) }>
+                        <TouchableOpacity style={ addBusinessSceneStyles.buttonView} onPress={ handleSubmit((data) => onSubmit(user.token, data)) }>
                             <View>
                             <Text style={ styles.fontMedium }>
                                 Submit
