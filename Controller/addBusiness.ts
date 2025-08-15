@@ -9,12 +9,15 @@ type BusiniessData = {
     address: string;
     website?: string;
     info?: string;
+    mainImage?: Blob | null;
+    imageFirst?: Blob | null;
+    imageSecond?: Blob | null;
+    imageThird?: Blob | null;
 }
 
-const addBusiness = async({token, name, email, phone, address, website, info}:BusiniessData) => {
-    console.log("her");
-    
-    try{
+const addBusiness = async ({ token, name, email, phone, address, website, info, mainImage, imageFirst, imageSecond, imageThird }: BusiniessData) => {
+
+    try {
         const response = axios.post('http://192.168.86.123:3001/business/addbusiness', {
             jwt: token,
             name,
@@ -24,13 +27,8 @@ const addBusiness = async({token, name, email, phone, address, website, info}:Bu
             website,
             info
         }
-        ).then(response => {
-                            console.log(response.data);
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        });      
-    } catch(error){
+        )
+    } catch (error) {
         console.log("error");
     }
 }

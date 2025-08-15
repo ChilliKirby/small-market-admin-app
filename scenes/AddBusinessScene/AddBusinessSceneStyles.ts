@@ -38,12 +38,18 @@ const styles = StyleSheet.create({
     },
     iconButtonView:{
         height: 60,
-        width: 60
+        width: 60,
+        marginVertical: 10
     },
     error: {
         color: 'red',
         marginTop: 5,
     },
+    image: {
+        width: width * .3,
+        height: width * .2,
+        marginVertical: 10
+    }
 })
 
 export default styles;

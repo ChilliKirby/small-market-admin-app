@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as Yup from "yup";
 
@@ -45,27 +45,42 @@ const formSchema = Yup.object({
  * 
  * @param data 
  */
-const onSubmit = async(token:string, data: FormData) => {
-    
+const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, imageFirst: Blob | null, imageSecond: Blob | null, imageThird: Blob | null ) => {
+
     const response = await addBusiness({
         //admin user info
         token: token,
         //Business info
-        name: data.name, 
-        email: data.email, 
-        phone: data.phone, 
-        address: data.address, 
-        website: data.website, 
-        info: data.info});
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        address: data.address,
+        website: data.website,
+        info: data.info,
+        mainImage: mainImage,
+        imageFirst: imageFirst,
+        imageSecond: imageSecond,
+        imageThird: imageThird
+    });
 }
 
 type props = BottomTabScreenProps<RootTabParamList, 'AddBusinessScene'>
 
-const AddBusinessScene = ({navigation}: props) => {
+const AddBusinessScene = ({ navigation }: props) => {
 
     const user = useSelector((state: RootState) => state.admin);
 
-    const [imageUri, setImageUri] = useState('');
+    const [imageUri, setImageUri] = useState<string | null>('');
+    const [blob, setBlob] = useState<Blob | null>(null);
+
+    const [imageUriFirst, setImageUriFirst] = useState<string | null>('');
+    const [blobFirst, setBlobFirst] = useState<Blob | null>(null);
+
+    const [imageUriSecond, setImageUriSecond] = useState<string | null>('');
+    const [blobSecond, setBlobSecond] = useState<Blob | null>(null);
+
+    const [imageUriThird, setImageUriThird] = useState<string | null>('');
+    const [blobThird, setBlobThird] = useState<Blob | null>(null);
 
     const {
         control,
@@ -78,18 +93,80 @@ const AddBusinessScene = ({navigation}: props) => {
     /**
      * Allow user to add image from gallery
      */
-    const selectImage = async() => {
-        try{       
-        const image = await pickImage();
-        if(!image) return;
+    const selectImage = async () => {
+        try {
+            const image = await pickImage();
+            if (!image) return;
 
-        const response = await fetch(image);
-        const blob = await response.blob();
-        
-        } catch(error){
+            const response = await fetch(image);
+
+            if (response) {
+                setBlob(await response.blob());
+                setImageUri(image);
+            }
+
+
+        } catch (error) {
             console.log(error);
         }
     };
+
+    /**
+     * Allows user to set first business image
+     */
+    const selectImageFirst = async () => {
+        try {
+            const image = await pickImage();
+            if (!image) return;
+
+            const response = await fetch(image);
+
+            if (response) {
+                setBlobFirst(await response.blob());
+                setImageUriFirst(image);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+     /**
+     * Allows user to set Second business image
+     */
+    const selectImageSecond = async () => {
+        try {
+            const image = await pickImage();
+            if (!image) return;
+
+            const response = await fetch(image);
+
+            if (response) {
+                setBlobSecond(await response.blob());
+                setImageUriSecond(image);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+     /**
+     * Allows user to set Third business image
+     */
+    const selectImageThird = async () => {
+        try {
+            const image = await pickImage();
+            if (!image) return;
+
+            const response = await fetch(image);
+
+            if (response) {
+                setBlobThird(await response.blob());
+                setImageUriThird(image);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
 
     return (
@@ -146,19 +223,70 @@ const AddBusinessScene = ({navigation}: props) => {
                             />
                         </View>
 
-                        <Text style={styles.fontMedium}> Main Business Image </Text>
+                        <View style={{ margin: 15, flexDirection: 'column' }}>
 
-                        <View style={{ margin: 15}}>
-                        <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={ selectImage }>
-                            <Feather name="camera" size={28} color="#007AFF"/>
-                        </TouchableOpacity>
+
+                            <Text style={styles.fontMedium}> Main Business Image </Text>
+
+                            {imageUri ? (
+                                <Image style={addBusinessSceneStyles.image} source={{ uri: imageUri }} />
+
+                            ) : (
+                                null
+                            )}
+
+                            <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImage}>
+                                <Feather name="camera" size={28} color="#007AFF" />
+                            </TouchableOpacity>
+
+
+                            <Text style={styles.fontMedium}> Business image 1 </Text>
+
+                            {imageUriFirst ? (
+                                <Image style={addBusinessSceneStyles.image} source={{ uri: imageUriFirst }} />
+                            ):(
+                                null
+                            )}
+
+                            <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImageFirst}>
+                                <Feather name="camera" size={28} color="#007AFF" />
+                            </TouchableOpacity>
+
+
+                            <Text style={styles.fontMedium}> Business image 2</Text>
+
+                            {imageUriSecond ? (
+                                <Image style={addBusinessSceneStyles.image} source={{ uri: imageUriSecond }}/>
+                            ):(
+                                null
+                            )}
+
+                            <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImageSecond}>
+                                <Feather name="camera" size={28} color="#007AFF" />
+                            </TouchableOpacity>
+
+
+                            <Text style={styles.fontMedium}> Business image 3</Text>
+
+                            {imageUriThird ? (
+                                <Image style={addBusinessSceneStyles.image} source={{ uri: imageUriThird }}/>
+                            ):(
+                                null
+                            )}
+
+                            <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImageThird}>
+                                <Feather name="camera" size={28} color="#007AFF" />
+                            </TouchableOpacity>
+
+
+
                         </View>
 
-                        <TouchableOpacity style={ addBusinessSceneStyles.buttonView} onPress={ handleSubmit((data) => onSubmit(user.token, data)) }>
+                        <TouchableOpacity style={addBusinessSceneStyles.buttonView} onPress={handleSubmit((data) => onSubmit(user.token, data, blob, blobFirst, blobSecond, blobThird))}>
                             <View>
-                            <Text style={ styles.fontMedium }>
-                                Submit
-                            </Text>
+                                <Text style={styles.fontMedium}>
+                                    Submit
+                                </Text>
                             </View>
                         </TouchableOpacity>
                     </ScrollView>
