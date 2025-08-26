@@ -45,7 +45,7 @@ const formSchema = Yup.object({
  * 
  * @param data 
  */
-const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, imageFirst: Blob | null, imageSecond: Blob | null, imageThird: Blob | null ) => {
+const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, mainImageUri: string, imageFirst: Blob | null, imageFirstUri: string, imageSecond: Blob | null, imageSecondUri: string, imageThird: Blob | null, imageThirdUri: string ) => {
 
     const response = await addBusiness({
         //admin user info
@@ -58,9 +58,13 @@ const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, i
         website: data.website,
         info: data.info,
         mainImage: mainImage,
+        mainImageUri: mainImageUri,
         imageFirst: imageFirst,
+        imageFirstUri: imageFirstUri,
         imageSecond: imageSecond,
-        imageThird: imageThird
+        imageSecondUri: imageSecondUri,
+        imageThird: imageThird,
+        imageThirdUri: imageThirdUri
     });
 }
 
@@ -70,16 +74,17 @@ const AddBusinessScene = ({ navigation }: props) => {
 
     const user = useSelector((state: RootState) => state.admin);
 
-    const [imageUri, setImageUri] = useState<string | null>('');
+    //Main business image
+    const [imageUri, setImageUri] = useState<string>('');
     const [blob, setBlob] = useState<Blob | null>(null);
 
-    const [imageUriFirst, setImageUriFirst] = useState<string | null>('');
+    const [imageUriFirst, setImageUriFirst] = useState<string>('');
     const [blobFirst, setBlobFirst] = useState<Blob | null>(null);
 
-    const [imageUriSecond, setImageUriSecond] = useState<string | null>('');
+    const [imageUriSecond, setImageUriSecond] = useState<string>('');
     const [blobSecond, setBlobSecond] = useState<Blob | null>(null);
 
-    const [imageUriThird, setImageUriThird] = useState<string | null>('');
+    const [imageUriThird, setImageUriThird] = useState<string>('');
     const [blobThird, setBlobThird] = useState<Blob | null>(null);
 
     const {
@@ -104,7 +109,7 @@ const AddBusinessScene = ({ navigation }: props) => {
                 setBlob(await response.blob());
                 setImageUri(image);
             }
-
+            
 
         } catch (error) {
             console.log(error);
@@ -282,7 +287,7 @@ const AddBusinessScene = ({ navigation }: props) => {
 
                         </View>
 
-                        <TouchableOpacity style={addBusinessSceneStyles.buttonView} onPress={handleSubmit((data) => onSubmit(user.token, data, blob, blobFirst, blobSecond, blobThird))}>
+                        <TouchableOpacity style={addBusinessSceneStyles.buttonView} onPress={handleSubmit((data) => onSubmit(user.token, data, blob, imageUri, blobFirst, imageUriFirst, blobSecond, imageUriSecond, blobThird, imageUriThird))}>
                             <View>
                                 <Text style={styles.fontMedium}>
                                     Submit
