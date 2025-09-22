@@ -46,7 +46,7 @@ const formSchema = Yup.object({
  * @param data 
  */
 const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, mainImageUri: string, imageFirst: Blob | null, imageFirstUri: string, imageSecond: Blob | null, imageSecondUri: string, imageThird: Blob | null, imageThirdUri: string ) => {
-
+    
     const response = await addBusiness({
         //admin user info
         token: token,
