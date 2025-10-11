@@ -20,7 +20,10 @@ type FormData = {
     name: string;
     email: string;
     phone: string;
-    address: string;
+    street: string;
+    city: string;
+    state: string;
+    zipcode: string;
     website: string;
     info: string;
 };
@@ -32,7 +35,10 @@ const formSchema = Yup.object({
         /^(\+?\d{1,3}[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/,
         'Invalid phone number format'
     ).default(""),
-    address: Yup.string().required("Address is required"),
+    street: Yup.string().required("Street is required"),
+    city: Yup.string().required("City is required."),
+    state: Yup.string().required("State is required"),
+    zipcode: Yup.string().required("Zip code is required"),
     website: Yup.string()
         .matches(
             /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/,
@@ -54,7 +60,10 @@ const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, m
         name: data.name,
         email: data.email,
         phone: data.phone,
-        address: data.address,
+        street: data.street,
+        city: data.city,
+        state: data.state,
+        zipcode: data.zipcode,
         website: data.website,
         info: data.info,
         mainImage: mainImage,
@@ -183,7 +192,7 @@ const AddBusinessScene = ({ navigation }: props) => {
                     </Text>
 
                     <ScrollView style={{ flexGrow: 1 }}>
-                        {['name', 'email', 'phone', 'address', 'website'].map((field) => (
+                        {['name', 'email', 'phone','street', 'city', 'state', 'zipcode', 'website'].map((field) => (
                             <View key={field}>
                                 <Text style={styles.fontMedium}> {field} </Text>
                                 <View key={field} style={addBusinessSceneStyles.inputContainerView} >

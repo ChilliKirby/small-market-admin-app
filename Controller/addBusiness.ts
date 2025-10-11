@@ -6,7 +6,10 @@ type BusiniessData = {
     name: string;
     email?: string;
     phone?: string;
-    address: string;
+    street: string;
+    city: string;
+    state: string;
+    zipcode: string;
     website?: string;
     info?: string;
     mainImage?: Blob | null;
@@ -19,7 +22,7 @@ type BusiniessData = {
     imageThirdUri?: string;
 }
 
-const addBusiness = async ({ token, name, email, phone, address, website, info, mainImage, mainImageUri, imageFirst, imageFirstUri, imageSecond, imageSecondUri, imageThird, imageThirdUri }: BusiniessData) => {
+const addBusiness = async ({ token, name, email, phone, street, city, state, zipcode, website, info, mainImage, mainImageUri, imageFirst, imageFirstUri, imageSecond, imageSecondUri, imageThird, imageThirdUri }: BusiniessData) => {
     console.log("in add");
     const formData = new FormData();
 
@@ -65,7 +68,11 @@ const addBusiness = async ({ token, name, email, phone, address, website, info, 
         formData.append('phone', phone);
     };
 
-    formData.append('address', address);
+    formData.append('street', street);
+    formData.append('city', city);
+    formData.append('state', state);
+    formData.append('zipcode', zipcode);
+    
 
     if (website) {
         formData.append('website', website);
