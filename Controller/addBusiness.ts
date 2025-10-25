@@ -23,7 +23,7 @@ type BusiniessData = {
 }
 
 const addBusiness = async ({ token, name, email, phone, street, city, state, zipcode, website, info, mainImage, mainImageUri, imageFirst, imageFirstUri, imageSecond, imageSecondUri, imageThird, imageThirdUri }: BusiniessData) => {
-    console.log("in add");
+    
     const formData = new FormData();
 
     if (mainImage && mainImageUri) {
@@ -83,17 +83,6 @@ const addBusiness = async ({ token, name, email, phone, street, city, state, zip
     };
 
     try {
-
-        // const response = axios.post('http://192.168.86.123:3001/business/addbusiness', {
-        //     jwt: token,
-        //     name,
-        //     email,
-        //     phone,
-        //     address,
-        //     website,
-        //     info
-        // }
-        //)
 
         const response = await axios.post('http://192.168.86.123:3001/business/addbusiness', formData, {
             headers: {

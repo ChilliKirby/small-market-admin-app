@@ -33,7 +33,7 @@ const formSchema = Yup.object({
     email: Yup.string().email("Invalid email").default(""),
     phone: Yup.string().matches(
         /^(\+?\d{1,3}[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/,
-        'Invalid phone number format'
+        'Enter valid phone number'
     ).default(""),
     street: Yup.string().required("Street is required"),
     city: Yup.string().required("City is required."),
@@ -42,7 +42,7 @@ const formSchema = Yup.object({
     website: Yup.string()
         .matches(
             /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/,
-            'Enter a valid website'
+            'Enter a valid website (ex: smallmarket.com)'
         ).default(""),
     info: Yup.string().max(500, "Info must not exceed 500 characters").default(""),
 });
