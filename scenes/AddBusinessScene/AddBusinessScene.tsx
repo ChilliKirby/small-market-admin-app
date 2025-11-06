@@ -48,11 +48,12 @@ const formSchema = Yup.object({
 });
 
 /**
- * 
- * @param data 
+ * Takes data for business and uses controller to post data to database
+ * @param token : string - JWT of user 
+ * @param data : Formdata - business info
  */
-const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, mainImageUri: string, imageFirst: Blob | null, imageFirstUri: string, imageSecond: Blob | null, imageSecondUri: string, imageThird: Blob | null, imageThirdUri: string ) => {
-    
+const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, mainImageUri: string, imageFirst: Blob | null, imageFirstUri: string, imageSecond: Blob | null, imageSecondUri: string, imageThird: Blob | null, imageThirdUri: string) => {
+
     const response = await addBusiness({
         //admin user info
         token: token,
@@ -75,6 +76,17 @@ const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, m
         imageThird: imageThird,
         imageThirdUri: imageThirdUri
     });
+
+    if (response) {
+        console.log("xxxxxxxxxxxxxxx")
+       
+        if (response.status >= 200 && response.status < 300) {
+            console.log("yes");
+            
+        } else{
+            console.log("unexperded error")
+        }
+    }
 }
 
 type props = BottomTabScreenProps<RootTabParamList, 'AddBusinessScene'>
@@ -118,7 +130,7 @@ const AddBusinessScene = ({ navigation }: props) => {
                 setBlob(await response.blob());
                 setImageUri(image);
             }
-            
+
 
         } catch (error) {
             console.log(error);
@@ -144,9 +156,9 @@ const AddBusinessScene = ({ navigation }: props) => {
         }
     };
 
-     /**
-     * Allows user to set Second business image
-     */
+    /**
+    * Allows user to set Second business image
+    */
     const selectImageSecond = async () => {
         try {
             const image = await pickImage();
@@ -163,9 +175,9 @@ const AddBusinessScene = ({ navigation }: props) => {
         }
     };
 
-     /**
-     * Allows user to set Third business image
-     */
+    /**
+    * Allows user to set Third business image
+    */
     const selectImageThird = async () => {
         try {
             const image = await pickImage();
@@ -192,7 +204,7 @@ const AddBusinessScene = ({ navigation }: props) => {
                     </Text>
 
                     <ScrollView style={{ flexGrow: 1 }}>
-                        {['name', 'email', 'phone','street', 'city', 'state', 'zipcode', 'website'].map((field) => (
+                        {['name', 'email', 'phone', 'street', 'city', 'state', 'zipcode', 'website'].map((field) => (
                             <View key={field}>
                                 <Text style={styles.fontMedium}> {field} </Text>
                                 <View key={field} style={addBusinessSceneStyles.inputContainerView} >
@@ -258,7 +270,7 @@ const AddBusinessScene = ({ navigation }: props) => {
 
                             {imageUriFirst ? (
                                 <Image style={addBusinessSceneStyles.image} source={{ uri: imageUriFirst }} />
-                            ):(
+                            ) : (
                                 null
                             )}
 
@@ -270,8 +282,8 @@ const AddBusinessScene = ({ navigation }: props) => {
                             <Text style={styles.fontMedium}> Business image 2</Text>
 
                             {imageUriSecond ? (
-                                <Image style={addBusinessSceneStyles.image} source={{ uri: imageUriSecond }}/>
-                            ):(
+                                <Image style={addBusinessSceneStyles.image} source={{ uri: imageUriSecond }} />
+                            ) : (
                                 null
                             )}
 
@@ -283,8 +295,8 @@ const AddBusinessScene = ({ navigation }: props) => {
                             <Text style={styles.fontMedium}> Business image 3</Text>
 
                             {imageUriThird ? (
-                                <Image style={addBusinessSceneStyles.image} source={{ uri: imageUriThird }}/>
-                            ):(
+                                <Image style={addBusinessSceneStyles.image} source={{ uri: imageUriThird }} />
+                            ) : (
                                 null
                             )}
 

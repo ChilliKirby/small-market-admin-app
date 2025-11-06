@@ -23,7 +23,7 @@ type BusiniessData = {
 }
 
 const addBusiness = async ({ token, name, email, phone, street, city, state, zipcode, website, info, mainImage, mainImageUri, imageFirst, imageFirstUri, imageSecond, imageSecondUri, imageThird, imageThirdUri }: BusiniessData) => {
-    
+
     const formData = new FormData();
 
     if (mainImage && mainImageUri) {
@@ -72,7 +72,7 @@ const addBusiness = async ({ token, name, email, phone, street, city, state, zip
     formData.append('city', city);
     formData.append('state', state);
     formData.append('zipcode', zipcode);
-    
+
 
     if (website) {
         formData.append('website', website);
@@ -90,9 +90,17 @@ const addBusiness = async ({ token, name, email, phone, street, city, state, zip
             },
         });
 
-        console.log("Upload success: ", response.data);
-    } catch (error) {
-        console.log(error);
+        //console.log("Upload success: ", response.data);
+
+        return response;
+
+    } catch (error: unknown) {
+        //console.log(error);
+        if (axios.isAxiosError(error)) {
+            return error.response;
+        } else {
+            return undefined;
+        }
     }
 }
 
