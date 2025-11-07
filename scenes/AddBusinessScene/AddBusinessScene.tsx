@@ -78,8 +78,7 @@ const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, m
     });
 
     if (response) {
-        console.log("xxxxxxxxxxxxxxx")
-       
+              
         if (response.status >= 200 && response.status < 300) {
             console.log("yes");
             

@@ -1,5 +1,8 @@
 
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+
+const width = Dimensions.get('screen').width;
+const height = Dimensions.get('screen').height;
 
 const styles = StyleSheet.create({
     mainView: {
@@ -32,7 +35,18 @@ const styles = StyleSheet.create({
     fontErrorRegular: {
         fontSize: 18,
         color: 'red',
-    }
+    },
+
+
+    /////////////////Text input///////////////////////////////
+     inputContainerView: {
+        width: width * .85,
+        height: 50,
+        marginBottom: 5,
+        backgroundColor: '#ffffff',
+        justifyContent: 'center',
+        borderRadius: 15,
+    },
 
 });
 
