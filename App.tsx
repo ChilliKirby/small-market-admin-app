@@ -7,6 +7,7 @@ import AddBusinessScene from "./scenes/AddBusinessScene/AddBusinessScene";
 import HomeScene from "./scenes/HomeScene/HomeScene";
 import LoginScene from "./scenes/LoginScene/LoginScene";
 import { RootTabParamList } from "./scenes/NavigationTypes";
+import SearchBusinessScene from "./scenes/SearchBusinessScene/SearchBusinessScene";
 import { store } from "./store/store";
 
 GoogleSignin.configure({
@@ -23,6 +24,7 @@ export default function App() {
           <Tab.Screen name="LoginScene" component={LoginScene} />
           <Tab.Screen name="HomeScene" component={HomeScene} />
           <Tab.Screen name="AddBusinessScene" component={AddBusinessScene} />
+          <Tab.Screen name="SearchBusinessScene" component={SearchBusinessScene} />
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>

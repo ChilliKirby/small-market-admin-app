@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     fontLarge: {
         fontSize: 30,
         color: 'white',
+        margin: 50
     },
     fontMedium: {
         fontSize: 22,
