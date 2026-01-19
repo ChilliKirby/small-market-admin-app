@@ -7,7 +7,29 @@ import searchBusinessStyles from './SearchBusinessStyles';
 
 const SearchBusinessScene = () => {
 
-    const [searchText, setSearchText] = useState("");
+    //Search input
+    const [searchText, setSearchText] = useState(""); 
+
+    // //Number of items per page to display
+    // const itemsPerPage = 20;
+
+    //Current page of business results
+    const [page, setPage] = useState(1);
+
+    type Item = {
+        id: string;
+        name: string;
+        mainPhotoUrl: string;
+    }
+
+    //Business results array
+    const [results, setResults] = useState([]);
+
+    //load more business results
+    const load = () => {
+        //todo///////////////////////////////
+
+    }
     
     return (
         <SafeAreaProvider>
@@ -21,6 +43,11 @@ const SearchBusinessScene = () => {
                     value={searchText}
                     placeholder='Search businesses...'
                     />
+
+                    {results.map((item) => (
+                        <Text key={item}> {item}</Text>
+                    ))}
+
 
                 </View>
             </SafeAreaView>
