@@ -5,9 +5,9 @@ type getBusinessesData = {
     page: number,
 }
 const getBusinesses = async ({token, page}: getBusinessesData) => {
-
+    console.log(" in getbusisness");
     try{
-        const response = await axios.get(`http://192.168.86.123:3001/business/searchbusiness`, {
+        const response = await axios.get(`http://192.168.86.123:3001/business/admingetbusinesses`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -16,8 +16,9 @@ const getBusinesses = async ({token, page}: getBusinessesData) => {
             }
 
         })
+        console.log(response);
     } catch(error){
-
+        console.log(error);
     }
 }
 

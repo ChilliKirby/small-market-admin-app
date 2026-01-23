@@ -3,4 +3,5 @@ export type RootTabParamList = {
     HomeScene: undefined;
     AddBusinessScene: undefined;
     SearchBusinessScene: undefined;
+    BrowseBusinessScene: undefined;
 };

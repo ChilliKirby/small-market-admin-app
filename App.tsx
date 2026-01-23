@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 
 import AddBusinessScene from "./scenes/AddBusinessScene/AddBusinessScene";
+import BrowseBusinessScene from "./scenes/BrowseBusinessScene/BrowseBusinessScene";
 import HomeScene from "./scenes/HomeScene/HomeScene";
 import LoginScene from "./scenes/LoginScene/LoginScene";
 import { RootTabParamList } from "./scenes/NavigationTypes";
@@ -25,6 +26,7 @@ export default function App() {
           <Tab.Screen name="HomeScene" component={HomeScene} />
           <Tab.Screen name="AddBusinessScene" component={AddBusinessScene} />
           <Tab.Screen name="SearchBusinessScene" component={SearchBusinessScene} />
+          <Tab.Screen name="BrowseBusinessScene" component={BrowseBusinessScene} />
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>
