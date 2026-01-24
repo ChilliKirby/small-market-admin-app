@@ -1,21 +1,27 @@
-import { useEffect } from "react";
+import { useState } from "react";
+import { Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-import getBusinesses from "@/Controller/getBusinesses";
+import styles from "../Styles";
 
 const BrowseBusinessScene = () =>{
 
-    useEffect(() => {
-        getBusinesses({
-            token: "hjk",
-            page: 6
-        });
-    },[]);
+    // useEffect(() => {
+    //     getBusinesses({
+    //         token: "hjk",
+    //         page: 1
+    //     });
+    // },[]);
+
+    const [businesses, setBusinesses] = useState<Business[]>([]);
 
     return(
         <SafeAreaProvider>
             <SafeAreaView>
+                <View style={[styles.mainView, {alignItems : 'center'}]}>
+                    <Text style={styles.fontLarge}>Browse Businesses </Text>
 
+                </View>
             </SafeAreaView>
         </SafeAreaProvider>
     )
