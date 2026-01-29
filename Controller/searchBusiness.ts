@@ -12,7 +12,7 @@ const searchBusiness = async ({token, businessName}: searchBusinessData) => {
                 Authorization: `Bearer ${token}`,
             },
             params:{
-                //page,
+                businessName,
             }
         })
 

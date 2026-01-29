@@ -1,6 +1,7 @@
-import { Text, TextInput, View } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
+import { Feather } from '@expo/vector-icons';
 import { useState } from 'react';
 import styles from '../Styles';
 import searchBusinessStyles from './SearchBusinessStyles';
@@ -37,6 +38,7 @@ const SearchBusinessScene = () => {
                 <View style={[styles.mainView, { alignItems: 'center' }]}>
                     <Text style={styles.fontLarge}> Search businesses</Text>
 
+                    <View style={searchBusinessStyles.searchBarView}>
                     <TextInput 
                     style={searchBusinessStyles.inputContainerView} 
                     onChangeText={setSearchText}
@@ -47,6 +49,11 @@ const SearchBusinessScene = () => {
                     {results.map((item) => (
                         <Text key={item}> {item}</Text>
                     ))}
+
+                    <TouchableOpacity>
+                        <Feather name='camera' size={28} color="#007AFF"/>
+                    </TouchableOpacity>
+                    </View>
 
 
                 </View>
