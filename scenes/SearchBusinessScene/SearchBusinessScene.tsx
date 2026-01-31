@@ -27,9 +27,9 @@ const SearchBusinessScene = () => {
     const [results, setResults] = useState([]);
 
     //load more business results
-    const load = () => {
+    const search = () => {
         //todo///////////////////////////////
-
+        
     }
     
     return (
@@ -50,7 +50,7 @@ const SearchBusinessScene = () => {
                         <Text key={item}> {item}</Text>
                     ))}
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={search}>
                         <Feather name='camera' size={28} color="#007AFF"/>
                     </TouchableOpacity>
                     </View>

@@ -1,4 +1,4 @@
-type BusinessType = {
+export type businessTypeFull = {
     _id: string;
     name: string;
     email: string;
