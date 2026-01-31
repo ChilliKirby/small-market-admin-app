@@ -15,28 +15,28 @@ const BrowseBusinessScene = () => {
     useEffect(() => {
 
         const fetchBusinesses = async () => {
-            try{
-            const list = await getBusinesses({
-                token: "hjk",
-                page: 1
-            });
+            try {
+                const list = await getBusinesses({
+                    token: "hjk",
+                    page: 1
+                });
 
-            setBusinesses(list);
-        } catch(err){
-            console.log(err);
-        } finally{
-            setLoading(false);
-        }
+                setBusinesses(list);
+            } catch (err) {
+                console.log(err);
+            } finally {
+                setLoading(false);
+            }
         };
 
         fetchBusinesses();
     }, []);
 
-    if(loading){
-        return(
+    if (loading) {
+        return (
             <SafeAreaProvider>
                 <SafeAreaView>
-                    <View style={[styles.mainView, { alignItems: 'center'}]}>
+                    <View style={[styles.mainView, { alignItems: 'center' }]}>
                         <ActivityIndicator size='large' />
                     </View>
                 </SafeAreaView>
@@ -50,13 +50,23 @@ const BrowseBusinessScene = () => {
                 <View style={[styles.mainView, { alignItems: 'center' }]}>
                     <Text style={styles.fontLarge}>Browse Businesses </Text>
 
-                    <FlatList 
+                    <FlatList
                         data={businesses}
                         keyExtractor={(item) => item._id}
-                        renderItem={({item}) => (
+                        renderItem={({ item }) => (
                             <View style={browseBusinessSceneStyles.businessRowView}>
-                                <Text style={styles.fontMedium}>{item.name}</Text>
-                            </View>    
+
+                                <View style={{ margin: 3, flexDirection: 'row' }}>
+                                    <Text style={[styles.fontMedium, { margin: 3 }]}>{item.name}</Text>
+                                    <Text style={[styles.fontRegular, {margin: 3}]}>{item.status}</Text>
+                                    <Text style={[styles.fontRegular, {margin: 3}]}>{item.subscriptionPlan}</Text>
+                                </View>
+
+                                <View style={{ margin: 7 }}>
+                                    <Text style={{margin: 3, fontSize:10, color: '#eee'}}>{item._id}</Text>
+                                </View>
+
+                            </View>
                         )}
                     />
                 </View>
