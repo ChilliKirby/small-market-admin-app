@@ -7,8 +7,11 @@ const browseBusinessSceneStyles = StyleSheet.create({
     businessRowView: {
         padding: 16, 
         width: width * .85,
+        height: 'auto',
         borderBottomWidth: 1,
         borderColor: "#eee",
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     }
 });
 
