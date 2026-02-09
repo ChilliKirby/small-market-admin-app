@@ -16,6 +16,7 @@ import styles from "../Styles";
 import addBusinessSceneStyles from './AddBusinessSceneStyles';
 
 
+
 type FormData = {
     name: string;
     email: string;
@@ -47,7 +48,28 @@ const formSchema = Yup.object({
     info: Yup.string().max(500, "Info must not exceed 500 characters").default(""),
 });
 
-/**
+
+
+type props = BottomTabScreenProps<RootTabParamList, 'AddBusinessScene'>
+
+const AddBusinessScene = ({ navigation }: props) => {
+
+    const user = useSelector((state: RootState) => state.admin);
+
+    //Main business image
+    const [imageUri, setImageUri] = useState<string>('');
+    const [blob, setBlob] = useState<Blob | null>(null);
+
+    const [imageUriFirst, setImageUriFirst] = useState<string>('');
+    const [blobFirst, setBlobFirst] = useState<Blob | null>(null);
+
+    const [imageUriSecond, setImageUriSecond] = useState<string>('');
+    const [blobSecond, setBlobSecond] = useState<Blob | null>(null);
+
+    const [imageUriThird, setImageUriThird] = useState<string>('');
+    const [blobThird, setBlobThird] = useState<Blob | null>(null);
+
+    /**
  * Takes data for business and uses controller to post data to database
  * @param token : string - JWT of user 
  * @param data : Formdata - business info
@@ -80,32 +102,16 @@ const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, m
     if (response) {
               
         if (response.status >= 200 && response.status < 300) {
-            console.log("yes");
-            
+            console.log(response.data);
+            navigation.navigate('ViewBusinessScene', {
+                businessId: response.data.id
+            });
         } else{
-            console.log("unexperded error")
+            console.log("response.data")
         }
     }
 }
 
-type props = BottomTabScreenProps<RootTabParamList, 'AddBusinessScene'>
-
-const AddBusinessScene = ({ navigation }: props) => {
-
-    const user = useSelector((state: RootState) => state.admin);
-
-    //Main business image
-    const [imageUri, setImageUri] = useState<string>('');
-    const [blob, setBlob] = useState<Blob | null>(null);
-
-    const [imageUriFirst, setImageUriFirst] = useState<string>('');
-    const [blobFirst, setBlobFirst] = useState<Blob | null>(null);
-
-    const [imageUriSecond, setImageUriSecond] = useState<string>('');
-    const [blobSecond, setBlobSecond] = useState<Blob | null>(null);
-
-    const [imageUriThird, setImageUriThird] = useState<string>('');
-    const [blobThird, setBlobThird] = useState<Blob | null>(null);
 
     const {
         control,
