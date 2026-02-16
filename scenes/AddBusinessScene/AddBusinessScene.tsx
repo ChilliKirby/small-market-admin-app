@@ -107,7 +107,7 @@ const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, m
                 businessId: response.data.id
             });
         } else{
-            console.log("response.data")
+            console.log(response.data)
         }
     }
 }

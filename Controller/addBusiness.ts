@@ -57,7 +57,7 @@ const addBusiness = async ({ token, name, email, phone, street, city, state, zip
         } as any);
     }
 
-    formData.append('jwt', token);
+   
     formData.append('name', name);
 
     if (email) {
@@ -86,6 +86,7 @@ const addBusiness = async ({ token, name, email, phone, street, city, state, zip
 
         const response = await axios.post('http://192.168.86.123:3001/business/addbusiness', formData, {
             headers: {
+                Authorization: `Bearer ${token}`,
                 "Content-Type": "multipart/form-data",
             },
         });

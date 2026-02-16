@@ -27,6 +27,7 @@ const LoginScene = ({navigation}: props) => {
         <SafeAreaProvider>
             <SafeAreaView>
                 <View style={styles.safeAreaView}>
+                    
                     <GoogleSignInButton />
                 </View>
             </SafeAreaView>

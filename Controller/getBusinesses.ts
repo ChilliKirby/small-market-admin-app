@@ -16,7 +16,7 @@ const getBusinesses = async ({token, page}: getBusinessesData) => {
             }
 
         })
-        console.log(response.data.businesses)
+        //console.log(response.data.businesses)
         if(response.data.businesses){
             return response.data.businesses
         }
