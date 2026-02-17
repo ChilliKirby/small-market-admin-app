@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
     mainView: {
         height: '100%',
         width: '100%',
-        backgroundColor: '#3D3D3D'
+        backgroundColor: '#3D3D3D',
+        padding: 7
     },
     safeAreaView:{
         height: '100%',
