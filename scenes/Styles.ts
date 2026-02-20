@@ -37,6 +37,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: 'red',
     },
+    fontEdit: {
+        fontSize: 18,
+        color: '#ADD8E6',
+    },
 
 
     /////////////////Text input///////////////////////////////
