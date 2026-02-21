@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 
 import { RootState } from "@/store/store";
 import getBusiness from "../../Controller/getBusiness";
-import { RootTabParamList } from "../NavigationTypes";
-import styles from "../Styles";
+import { RootTabParamList } from "../../NavigationTypes";
+import styles from "../../Styles";
 import viewBusinessStyles from "./ViewBusinessSceneStyles";
 
 
@@ -37,7 +37,7 @@ interface Business {
  * @param param0 
  * @returns 
  */
-const ViewBusinessScene = ({ route }: props) => {
+const ViewBusinessScene = ({ navigation, route }: props) => {
 
     const [business, setBusiness] = useState<Business | null>();
 
@@ -60,13 +60,23 @@ const ViewBusinessScene = ({ route }: props) => {
         fetchBusiness();
     }, []);
 
+    const navigateToEditBusiness = () => {
+        navigation.navigate("EditBusinessScene", {
+            businessId: id
+        })
+    };
+
     return (
         <SafeAreaProvider>
             <SafeAreaView>
                 <ScrollView>
                     {business ? (
                         <View style={[styles.mainView, { alignContent: 'center' }]}>
-
+                              <TouchableOpacity style={{alignSelf: 'flex-end', margin: 15}} onPress={navigateToEditBusiness}>
+                                    <Text style={styles.fontEdit}>
+                                        edit information
+                                    </Text>
+                                </TouchableOpacity>
                             <Image
                                 source={
                                     business.imageMain
@@ -81,23 +91,21 @@ const ViewBusinessScene = ({ route }: props) => {
                                     Id: {business._id}
                                 </Text>
 
-                                <TouchableOpacity >
-                                    <Text style={styles.fontEdit}>
-                                        edit
-                                    </Text>
-                                </TouchableOpacity>
                             </View>
 
                             <View style={viewBusinessStyles.sectionView}>
                                 <Text style={styles.fontMedium}>
                                     Name: {business.name}
                                 </Text>
+
+                               
                             </View>
 
                             <View style={viewBusinessStyles.sectionView}>
                                 <Text style={styles.fontMedium}>
                                     Phone: {business.phone}
                                 </Text>
+                                
                             </View>
 
                             <View style={viewBusinessStyles.sectionView}>

@@ -11,8 +11,8 @@ import addBusiness from '@/Controller/addBusiness';
 import { RootState } from '@/store/store';
 import { pickImage } from '@/Utilities/pickImage';
 import { useSelector } from 'react-redux';
-import { RootTabParamList } from "../NavigationTypes";
-import styles from "../Styles";
+import { RootTabParamList } from "../../NavigationTypes";
+import styles from "../../Styles";
 import addBusinessSceneStyles from './AddBusinessSceneStyles';
 
 

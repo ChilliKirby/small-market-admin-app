@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from '@/store/store';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { RootTabParamList } from '../NavigationTypes';
-import styles from '../Styles';
+import { RootTabParamList } from '../../NavigationTypes';
+import styles from '../../Styles';
 import GoogleSignInButton from './Components/GoogleSignInButton';
 
 type props = BottomTabScreenProps<RootTabParamList, 'LoginScene'>;

@@ -8,7 +8,8 @@ const viewBusinessStyles = StyleSheet.create({
         width: width * .8,
         height: width * .4,
         alignSelf: 'center',
-        marginBottom: 7
+        marginBottom: 7,
+        borderRadius: 7
     },
     imageSmallView:{
         width: width * .3,

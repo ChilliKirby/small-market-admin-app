@@ -3,7 +3,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 import { Feather } from '@expo/vector-icons';
 import { useState } from 'react';
-import styles from '../Styles';
+import styles from '../../Styles';
 import searchBusinessStyles from './SearchBusinessStyles';
 
 const SearchBusinessScene = () => {

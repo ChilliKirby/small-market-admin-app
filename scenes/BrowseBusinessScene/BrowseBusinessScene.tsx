@@ -4,7 +4,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import getBusinesses from "@/Controller/getBusinesses";
 import { businessTypeShort } from "@/Utilities/BusinessTypeShort";
-import styles from "../Styles";
+import styles from "../../Styles";
 import browseBusinessSceneStyles from "./BrowseBusinessSceneStyles";
 
 const BrowseBusinessScene = () => {

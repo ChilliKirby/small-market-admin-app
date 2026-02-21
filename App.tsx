@@ -3,11 +3,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 
+import { RootTabParamList } from "./NavigationTypes";
 import AddBusinessScene from "./scenes/AddBusinessScene/AddBusinessScene";
 import BrowseBusinessScene from "./scenes/BrowseBusinessScene/BrowseBusinessScene";
+import EditBusinessScene from "./scenes/EditBusinessScene/EditBusinessScene";
 import HomeScene from "./scenes/HomeScene/HomeScene";
 import LoginScene from "./scenes/LoginScene/LoginScene";
-import { RootTabParamList } from "./scenes/NavigationTypes";
 import SearchBusinessScene from "./scenes/SearchBusinessScene/SearchBusinessScene";
 import ViewBusinessScene from "./scenes/ViewBusinessScene/ViewBusinessScene";
 import { store } from "./store/store";
@@ -29,6 +30,7 @@ export default function App() {
           <Tab.Screen name="SearchBusinessScene" component={SearchBusinessScene} />
           <Tab.Screen name="BrowseBusinessScene" component={BrowseBusinessScene} />
           <Tab.Screen name="ViewBusinessScene" component={ViewBusinessScene} />
+          <Tab.Screen name="EditBusinessScene" component={EditBusinessScene} />
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>

@@ -1,3 +1,4 @@
+
 export type RootTabParamList = {
     LoginScene: undefined;
     HomeScene: undefined;
@@ -7,4 +8,5 @@ export type RootTabParamList = {
     ViewBusinessScene: {
         businessId: string;
     };
+    EditBusinessScene: { businessId: string};
 };

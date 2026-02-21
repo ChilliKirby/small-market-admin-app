@@ -2,8 +2,8 @@ import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { ScrollView, StatusBar, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-import { RootTabParamList } from "../NavigationTypes";
-import styles from "../Styles";
+import { RootTabParamList } from "../../NavigationTypes";
+import styles from "../../Styles";
 import homeSceneStyles from './HomeSceneStyles';
 
 
