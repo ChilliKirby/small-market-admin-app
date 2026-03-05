@@ -5,6 +5,13 @@ type getBusinessData = {
     token?: string,
     id?: string,
 }
+
+/**
+ * 
+ * @param token - jwt for user
+ * @param id - business MongoDB id
+ * @returns - business info (name, email, etc...)
+ */
 const getBusiness = async({token, id}: getBusinessData) => {
     try{
         const response = await axios.get(`http://192.168.86.123:3001/business/admingetbusiness`, {
@@ -12,11 +19,12 @@ const getBusiness = async({token, id}: getBusinessData) => {
                 Authorization: `Bearer ${token}`,
             },
             params:{
-                id: "6993c38f6f2a8cf3cd119c28"
+                id: "69a9f6cc3e85bb7f15910b95"
             }
         });
 
         if(response){
+            console.log(response.data.response);
             return response.data.business
         }
     } catch(error){

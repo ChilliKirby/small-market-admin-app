@@ -7,6 +7,8 @@ export interface Business {
     city: string,
     street: string,
     zipcode: string,
+    info: string,
+    website: string,
     imageMain: string,
     imageFirst: string,
     imageSecond: string,
