@@ -14,7 +14,7 @@ type getBusinessData = {
  */
 const getBusiness = async({token, id}: getBusinessData) => {
     try{
-        const response = await axios.get(`http://192.168.86.123:3001/business/admingetbusiness`, {
+        const response = await axios.get(`http://192.168.86.123:3001/admin/business/admingetbusiness`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

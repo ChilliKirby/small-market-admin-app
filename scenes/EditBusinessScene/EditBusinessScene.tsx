@@ -42,8 +42,8 @@ type FormData = Yup.InferType<typeof formSchema>;
 /**
  * Sends edited business information to server to be saved
  */
-const submitInfo: SubmitHandler<FormData> = () => {
-    console.log("submit");
+const submitInfo: SubmitHandler<FormData> = async(data: FormData) => {
+    
 }
 
 /**

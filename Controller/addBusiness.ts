@@ -84,7 +84,7 @@ const addBusiness = async ({ token, name, email, phone, street, city, state, zip
 
     try {
 
-        const response = await axios.post('http://192.168.86.123:3001/business/addbusiness', formData, {
+        const response = await axios.post('http://192.168.86.123:3001/admin/business/addbusiness', formData, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "multipart/form-data",
