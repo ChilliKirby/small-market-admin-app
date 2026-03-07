@@ -53,6 +53,17 @@ const styles = StyleSheet.create({
         borderRadius: 15,
     },
 
+    ////////////////Buttons/////////////////////////////
+    buttonView:{
+        height: 60,
+        width: width * .85,
+        padding: 15,
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#2196F3'
+    },
+
 });
 
 export default styles;

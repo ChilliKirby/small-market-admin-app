@@ -1,7 +1,7 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { useEffect, useState } from 'react';
-import { Controller, useForm } from "react-hook-form";
-import { ScrollView, Text, TextInput, View } from 'react-native';
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
@@ -17,18 +17,6 @@ import editBusinessSceneStyles from "./EditBusinessSceneStyles";
 
 
 type props = BottomTabScreenProps<RootTabParamList, 'EditBusinessScene'>
-
-// type FormData = {
-//     name: string;
-//     email: string;
-//     phone: string;
-//     street: string;
-//     city: string;
-//     state: string;
-//     zipcode: string;
-//     website: string;
-//     info: string;
-// }
 
 const formSchema = Yup.object({
     name: Yup.string().defined().required("Name is required"),
@@ -50,6 +38,13 @@ const formSchema = Yup.object({
 });
 
 type FormData = Yup.InferType<typeof formSchema>;
+
+/**
+ * Sends edited business information to server to be saved
+ */
+const submitInfo: SubmitHandler<FormData> = () => {
+    console.log("submit");
+}
 
 /**
  * EditBusinessScene
@@ -75,6 +70,7 @@ const EditBusinessScene = ({ navigation, route }: props) => {
     const {
         control,
         handleSubmit,
+        setValue,
         formState: { errors }
     } = useForm<FormData>({
         resolver: yupResolver(formSchema)
@@ -88,6 +84,15 @@ const EditBusinessScene = ({ navigation, route }: props) => {
             try {
                 const response = await getBusiness({ token, id });
                 setBusiness(response);
+                setValue("name", response?.name);
+                setValue("email", response.email);
+                setValue("phone", response.phone);
+                setValue("street", response.street);
+                setValue("city", response.city);
+                setValue("state", response.state);
+                setValue("zipcode", response.zipcode);
+                setValue("website", response.website);
+                setValue("info", response.info);
             } catch (error) {
                 console.log(error);
             }
@@ -106,8 +111,6 @@ const EditBusinessScene = ({ navigation, route }: props) => {
 
                     {business && (
                         <ScrollView style={{ flexGrow: 1 }}>
-
-                            'name', 'email', 'phone', 'street', 'city', 'state', 'zipcode', 'website', 'info'
                             <Text style={styles.fontMedium}>Business name</Text>
                             <Controller
                                 name="name"
@@ -124,6 +127,9 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
+                            {errors.name &&
+                                <Text style={styles.fontErrorRegular}> {errors.name.message} </Text>
+                            }
 
                             <Text style={styles.fontMedium}>Business email</Text>
                             <Controller
@@ -141,6 +147,9 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
+                             {errors.email &&
+                                <Text style={styles.fontErrorRegular}> {errors.email.message} </Text>
+                            }
 
                             <Text style={styles.fontMedium}>Business phone</Text>
                             <Controller
@@ -158,6 +167,9 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
+                            {errors.phone &&
+                                <Text style={styles.fontErrorRegular}>{errors.phone.message}</Text>
+                            }
 
                             <Text style={styles.fontMedium}>Business street</Text>
                             <Controller
@@ -175,6 +187,9 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
+                             {errors.street &&
+                                <Text style={styles.fontErrorRegular}> {errors.street.message} </Text>
+                            }
 
                             <Text style={styles.fontMedium}>Business city</Text>
                             <Controller
@@ -192,6 +207,9 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
+                             {errors.city &&
+                                <Text style={styles.fontErrorRegular}> {errors.city.message} </Text>
+                            }
 
                             <Text style={styles.fontMedium}>Business state</Text>
                             <Controller
@@ -209,6 +227,9 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
+                             {errors.state &&
+                                <Text style={styles.fontErrorRegular}> {errors.state.message} </Text>
+                            }
 
                             <Text style={styles.fontMedium}>Business zipcode</Text>
                             <Controller
@@ -226,6 +247,9 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
+                             {errors.zipcode &&
+                                <Text style={styles.fontErrorRegular}> {errors.zipcode.message} </Text>
+                            }
 
                             <Text style={styles.fontMedium}>Business website</Text>
                             <Controller
@@ -243,6 +267,9 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
+                             {errors.website &&
+                                <Text style={styles.fontErrorRegular}> {errors.website.message} </Text>
+                            }
 
                             <Text style={styles.fontMedium}>Business info</Text>
                             <Controller
@@ -260,6 +287,18 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
+                             {errors.info &&
+                                <Text style={styles.fontErrorRegular}> {errors.info.message} </Text>
+                            }
+
+
+                            <TouchableOpacity style={styles.buttonView} onPress={handleSubmit(submitInfo)}>
+                                <View>
+                                    <Text style={styles.fontMedium}>
+                                        Submit
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
 
                         </ScrollView>
                     )}
