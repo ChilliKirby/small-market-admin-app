@@ -43,7 +43,7 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
 
     const user = useSelector((state: RootState) => state.admin);
 
-    const id = "route.params.businessId";
+    const id = route.params.businessId;
     const token = user.token;
 
     useEffect(() => {

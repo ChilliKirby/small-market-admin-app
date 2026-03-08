@@ -6,6 +6,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
+import editBusiness from '@/Controller/editBusiness';
 import getBusiness from '@/Controller/getBusiness';
 import { RootTabParamList } from '@/NavigationTypes';
 import { RootState } from '@/store/store';
@@ -39,12 +40,6 @@ const formSchema = Yup.object({
 
 type FormData = Yup.InferType<typeof formSchema>;
 
-/**
- * Sends edited business information to server to be saved
- */
-const submitInfo: SubmitHandler<FormData> = async(data: FormData) => {
-    
-}
 
 /**
  * EditBusinessScene
@@ -101,7 +96,17 @@ const EditBusinessScene = ({ navigation, route }: props) => {
         fetchBusiness();
     }, []);
 
-
+    /**
+    * Sends edited business information to server to be saved
+    */
+    const submitInfo: SubmitHandler<FormData> = async (data: FormData) => {
+        try {
+            const response = await editBusiness({token, id, data});
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <SafeAreaProvider>
@@ -147,7 +152,7 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
-                             {errors.email &&
+                            {errors.email &&
                                 <Text style={styles.fontErrorRegular}> {errors.email.message} </Text>
                             }
 
@@ -187,7 +192,7 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
-                             {errors.street &&
+                            {errors.street &&
                                 <Text style={styles.fontErrorRegular}> {errors.street.message} </Text>
                             }
 
@@ -207,7 +212,7 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
-                             {errors.city &&
+                            {errors.city &&
                                 <Text style={styles.fontErrorRegular}> {errors.city.message} </Text>
                             }
 
@@ -227,7 +232,7 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
-                             {errors.state &&
+                            {errors.state &&
                                 <Text style={styles.fontErrorRegular}> {errors.state.message} </Text>
                             }
 
@@ -247,7 +252,7 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
-                             {errors.zipcode &&
+                            {errors.zipcode &&
                                 <Text style={styles.fontErrorRegular}> {errors.zipcode.message} </Text>
                             }
 
@@ -267,7 +272,7 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
-                             {errors.website &&
+                            {errors.website &&
                                 <Text style={styles.fontErrorRegular}> {errors.website.message} </Text>
                             }
 
@@ -287,7 +292,7 @@ const EditBusinessScene = ({ navigation, route }: props) => {
                                     </View>
                                 )}
                             />
-                             {errors.info &&
+                            {errors.info &&
                                 <Text style={styles.fontErrorRegular}> {errors.info.message} </Text>
                             }
 

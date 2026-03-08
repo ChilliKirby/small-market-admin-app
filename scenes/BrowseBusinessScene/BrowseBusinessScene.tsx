@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { useSelector } from "react-redux";
 
 import getBusinesses from "@/Controller/getBusinesses";
+import { RootState } from "@/store/store";
 import { businessTypeShort } from "@/Utilities/BusinessTypeShort";
 import styles from "../../Styles";
 import browseBusinessSceneStyles from "./BrowseBusinessSceneStyles";
@@ -12,12 +14,14 @@ const BrowseBusinessScene = () => {
     const [businesses, setBusinesses] = useState<businessTypeShort[]>([]);
     const [loading, setLoading] = useState(true);
 
+    const token = useSelector((state: RootState) => state.admin.token);
+
     useEffect(() => {
 
         const fetchBusinesses = async () => {
             try {
                 const list = await getBusinesses({
-                    token: "hjk",
+                    token: token,
                     page: 1
                 });
 
