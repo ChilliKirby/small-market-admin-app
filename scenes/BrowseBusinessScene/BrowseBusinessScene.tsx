@@ -1,15 +1,23 @@
+import { Feather } from "@expo/vector-icons";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 
 import getBusinesses from "@/Controller/getBusinesses";
+import { RootTabParamList } from "@/NavigationTypes";
 import { RootState } from "@/store/store";
 import { businessTypeShort } from "@/Utilities/BusinessTypeShort";
 import styles from "../../Styles";
 import browseBusinessSceneStyles from "./BrowseBusinessSceneStyles";
 
-const BrowseBusinessScene = () => {
+type props = BottomTabScreenProps<RootTabParamList, 'ViewBusinessScene'>;
+/**
+ * Shows list of businesses for browsing
+ * 
+ */
+const BrowseBusinessScene = ({navigation, route}: props) => {
 
     const [businesses, setBusinesses] = useState<businessTypeShort[]>([]);
     const [loading, setLoading] = useState(true);
@@ -18,6 +26,9 @@ const BrowseBusinessScene = () => {
 
     useEffect(() => {
 
+        /**
+         * Fetch set of businesses to be displayed in list.
+         */
         const fetchBusinesses = async () => {
             try {
                 const list = await getBusinesses({
@@ -36,6 +47,7 @@ const BrowseBusinessScene = () => {
         fetchBusinesses();
     }, []);
 
+    //Display loading symbol while fetching business information.
     if (loading) {
         return (
             <SafeAreaProvider>
@@ -47,6 +59,12 @@ const BrowseBusinessScene = () => {
             </SafeAreaProvider>
         )
     };
+
+    const viewBusiness = (businessId: string) => {
+        navigation.navigate("ViewBusinessScene", {
+            businessId
+        })
+    }
 
     return (
         <SafeAreaProvider>
@@ -67,7 +85,7 @@ const BrowseBusinessScene = () => {
                                     <Text style={{fontSize:12, color: '#eee'}}>{item._id}</Text>
                                 </View>
 
-                                <View style={{ margin: 7, justifyContent: 'center' }}>
+                                <View style={{ margin: 7, justifyContent: 'center', flexDirection: 'row', columnGap: 10 }}>
                                     <Image
                                     source={
                                             item.imageMain
@@ -76,7 +94,10 @@ const BrowseBusinessScene = () => {
                                     style={{ width: 64, height: 64, borderRadius: 10 }}
                                     resizeMode="cover"
                                 />  
-                                
+
+                                <TouchableOpacity onPress={()=> viewBusiness(item._id)}>
+                                <Feather name="info" size={32} color="#007AFF"/>
+                                </TouchableOpacity>
                                 </View>
 
                             </View>

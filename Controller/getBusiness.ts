@@ -19,7 +19,7 @@ const getBusiness = async({token, id}: getBusinessData) => {
                 Authorization: `Bearer ${token}`,
             },
             params:{
-                id: "69a9f6cc3e85bb7f15910b95"
+                id: id
             }
         });
 

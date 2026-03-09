@@ -45,7 +45,7 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
 
     const id = route.params.businessId;
     const token = user.token;
-
+    
     useEffect(() => {
         const fetchBusiness = async () => {
             try {
@@ -58,7 +58,7 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
         };
 
         fetchBusiness();
-    }, []);
+    }, [id]);
 
     const navigateToEditBusiness = () => {
         navigation.navigate("EditBusinessScene", {
@@ -72,11 +72,11 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                 <ScrollView>
                     {business ? (
                         <View style={[styles.mainView, { alignContent: 'center' }]}>
-                              <TouchableOpacity style={{alignSelf: 'flex-end', margin: 15}} onPress={navigateToEditBusiness}>
-                                    <Text style={styles.fontEdit}>
-                                        edit information
-                                    </Text>
-                                </TouchableOpacity>
+                            <TouchableOpacity style={{ alignSelf: 'flex-end', margin: 15 }} onPress={navigateToEditBusiness}>
+                                <Text style={styles.fontEdit}>
+                                    edit information
+                                </Text>
+                            </TouchableOpacity>
                             <Image
                                 source={
                                     business.imageMain
@@ -98,14 +98,14 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                                     Name: {business.name}
                                 </Text>
 
-                               
+
                             </View>
 
                             <View style={viewBusinessStyles.sectionView}>
                                 <Text style={styles.fontMedium}>
                                     Phone: {business.phone}
                                 </Text>
-                                
+
                             </View>
 
                             <View style={viewBusinessStyles.sectionView}>
@@ -179,36 +179,36 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                                 </Text>
                             </View>
 
-                                <View style={viewBusinessStyles.sectionView}>
-                            <Image
-                                source={
-                                    business.imageFirst
-                                        ? { uri: business.imageFirst }
-                                        : require("../../assets/images/no-image.png")
-                                }
-                                style={viewBusinessStyles.imageSmallView}
-                            />
-</View>
+                            <View style={viewBusinessStyles.sectionView}>
+                                <Image
+                                    source={
+                                        business.imageFirst
+                                            ? { uri: business.imageFirst }
+                                            : require("../../assets/images/no-image.png")
+                                    }
+                                    style={viewBusinessStyles.imageSmallView}
+                                />
+                            </View>
 
-<View style={viewBusinessStyles.sectionView}>
-                            <Image
-                                source={
-                                    business.imageSecond
-                                        ? { uri: business.imageSecond }
-                                        : require("../../assets/images/no-image.png")
-                                }
-                                style={viewBusinessStyles.imageSmallView}
-                            />
-</View>
-<View style={viewBusinessStyles.sectionView}>
-                            <Image
-                                source={
-                                    business.imageThird
-                                        ? { uri: business.imageThird }
-                                        : require("../../assets/images/no-image.png")
-                                }
-                                style={viewBusinessStyles.imageSmallView}
-                            />
+                            <View style={viewBusinessStyles.sectionView}>
+                                <Image
+                                    source={
+                                        business.imageSecond
+                                            ? { uri: business.imageSecond }
+                                            : require("../../assets/images/no-image.png")
+                                    }
+                                    style={viewBusinessStyles.imageSmallView}
+                                />
+                            </View>
+                            <View style={viewBusinessStyles.sectionView}>
+                                <Image
+                                    source={
+                                        business.imageThird
+                                            ? { uri: business.imageThird }
+                                            : require("../../assets/images/no-image.png")
+                                    }
+                                    style={viewBusinessStyles.imageSmallView}
+                                />
                             </View>
 
                         </View>
