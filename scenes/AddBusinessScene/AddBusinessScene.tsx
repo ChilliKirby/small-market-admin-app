@@ -60,21 +60,21 @@ const AddBusinessScene = ({ navigation }: props) => {
     const [imageUri, setImageUri] = useState<string>('');
     const [blob, setBlob] = useState<Blob | null>(null);
 
-    const [imageUriFirst, setImageUriFirst] = useState<string>('');
-    const [blobFirst, setBlobFirst] = useState<Blob | null>(null);
+    // const [imageUriFirst, setImageUriFirst] = useState<string>('');
+    // const [blobFirst, setBlobFirst] = useState<Blob | null>(null);
 
-    const [imageUriSecond, setImageUriSecond] = useState<string>('');
-    const [blobSecond, setBlobSecond] = useState<Blob | null>(null);
+    // const [imageUriSecond, setImageUriSecond] = useState<string>('');
+    // const [blobSecond, setBlobSecond] = useState<Blob | null>(null);
 
-    const [imageUriThird, setImageUriThird] = useState<string>('');
-    const [blobThird, setBlobThird] = useState<Blob | null>(null);
+    // const [imageUriThird, setImageUriThird] = useState<string>('');
+    // const [blobThird, setBlobThird] = useState<Blob | null>(null);
 
     /**
  * Takes data for business and uses controller to post data to database
  * @param token : string - JWT of user 
  * @param data : Formdata - business info
  */
-const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, mainImageUri: string, imageFirst: Blob | null, imageFirstUri: string, imageSecond: Blob | null, imageSecondUri: string, imageThird: Blob | null, imageThirdUri: string) => {
+const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, mainImageUri: string) => {
 
     const response = await addBusiness({
         //admin user info
@@ -91,12 +91,12 @@ const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, m
         info: data.info,
         mainImage: mainImage,
         mainImageUri: mainImageUri,
-        imageFirst: imageFirst,
-        imageFirstUri: imageFirstUri,
-        imageSecond: imageSecond,
-        imageSecondUri: imageSecondUri,
-        imageThird: imageThird,
-        imageThirdUri: imageThirdUri
+        // imageFirst: imageFirst,
+        // imageFirstUri: imageFirstUri,
+        // imageSecond: imageSecond,
+        // imageSecondUri: imageSecondUri,
+        // imageThird: imageThird,
+        // imageThirdUri: imageThirdUri
     });
 
     if (response) {
@@ -145,59 +145,59 @@ const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, m
     /**
      * Allows user to set first business image
      */
-    const selectImageFirst = async () => {
-        try {
-            const image = await pickImage();
-            if (!image) return;
+    // const selectImageFirst = async () => {
+    //     try {
+    //         const image = await pickImage();
+    //         if (!image) return;
 
-            const response = await fetch(image);
+    //         const response = await fetch(image);
 
-            if (response) {
-                setBlobFirst(await response.blob());
-                setImageUriFirst(image);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    //         if (response) {
+    //             setBlobFirst(await response.blob());
+    //             setImageUriFirst(image);
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
     /**
     * Allows user to set Second business image
     */
-    const selectImageSecond = async () => {
-        try {
-            const image = await pickImage();
-            if (!image) return;
+    // const selectImageSecond = async () => {
+    //     try {
+    //         const image = await pickImage();
+    //         if (!image) return;
 
-            const response = await fetch(image);
+    //         const response = await fetch(image);
 
-            if (response) {
-                setBlobSecond(await response.blob());
-                setImageUriSecond(image);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    //         if (response) {
+    //             setBlobSecond(await response.blob());
+    //             setImageUriSecond(image);
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
     /**
     * Allows user to set Third business image
     */
-    const selectImageThird = async () => {
-        try {
-            const image = await pickImage();
-            if (!image) return;
+    // const selectImageThird = async () => {
+    //     try {
+    //         const image = await pickImage();
+    //         if (!image) return;
 
-            const response = await fetch(image);
+    //         const response = await fetch(image);
 
-            if (response) {
-                setBlobThird(await response.blob());
-                setImageUriThird(image);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    //         if (response) {
+    //             setBlobThird(await response.blob());
+    //             setImageUriThird(image);
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
 
     return (
@@ -271,28 +271,28 @@ const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, m
                             </TouchableOpacity>
 
 
-                            <Text style={styles.fontMedium}> Business image 1 </Text>
+                            {/* <Text style={styles.fontMedium}> Business image 1 </Text>
 
                             {imageUriFirst ? (
                                 <Image style={addBusinessSceneStyles.image} source={{ uri: imageUriFirst }} />
                             ) : (
                                 null
-                            )}
+                            )} */}
 
-                            <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImageFirst}>
+                            {/* <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImageFirst}>
                                 <Feather name="camera" size={28} color="#007AFF" />
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
 
 
-                            <Text style={styles.fontMedium}> Business image 2</Text>
+                            {/* <Text style={styles.fontMedium}> Business image 2</Text>
 
                             {imageUriSecond ? (
                                 <Image style={addBusinessSceneStyles.image} source={{ uri: imageUriSecond }} />
                             ) : (
                                 null
-                            )}
+                            )} */}
 
-                            <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImageSecond}>
+                            {/* <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImageSecond}>
                                 <Feather name="camera" size={28} color="#007AFF" />
                             </TouchableOpacity>
 
@@ -307,13 +307,13 @@ const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, m
 
                             <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImageThird}>
                                 <Feather name="camera" size={28} color="#007AFF" />
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
 
 
 
                         </View>
 
-                        <TouchableOpacity style={addBusinessSceneStyles.buttonView} onPress={handleSubmit((data) => onSubmit(user.token, data, blob, imageUri, blobFirst, imageUriFirst, blobSecond, imageUriSecond, blobThird, imageUriThird))}>
+                        <TouchableOpacity style={addBusinessSceneStyles.buttonView} onPress={handleSubmit((data) => onSubmit(user.token, data, blob, imageUri))}>
                             <View>
                                 <Text style={styles.fontMedium}>
                                     Submit
