@@ -17,26 +17,37 @@ type props = BottomTabScreenProps<RootTabParamList, 'ViewBusinessScene'>;
  * Shows list of businesses for browsing
  * 
  */
-const BrowseBusinessScene = ({navigation, route}: props) => {
+const BrowseBusinessScene = ({ navigation, route }: props) => {
 
+    //list of businesses
     const [businesses, setBusinesses] = useState<businessTypeShort[]>([]);
+
+    //total pages of business collection
+    const [totalPages, setTotalPages] = useState(1);
+
+    //current page of businesses
+    const [page, setPage] = useState(1);
+
+    //loading state of the screen
     const [loading, setLoading] = useState(true);
 
+    //jwt token 
     const token = useSelector((state: RootState) => state.admin.token);
 
-    useEffect(() => {
-
-        /**
-         * Fetch set of businesses to be displayed in list.
+    /**
+         * Fetch set of businesses to be displayed in list. Called 
+         * when page is changed.
          */
+    useEffect(() => {
         const fetchBusinesses = async () => {
             try {
-                const list = await getBusinesses({
+                const response = await getBusinesses({
                     token: token,
-                    page: 1
+                    page: page
                 });
 
-                setBusinesses(list);
+                setBusinesses(response.businesses);
+                setTotalPages(response.totalPages);
             } catch (err) {
                 console.log(err);
             } finally {
@@ -45,7 +56,7 @@ const BrowseBusinessScene = ({navigation, route}: props) => {
         };
 
         fetchBusinesses();
-    }, []);
+    }, [page]);
 
     //Display loading symbol while fetching business information.
     if (loading) {
@@ -60,6 +71,42 @@ const BrowseBusinessScene = ({navigation, route}: props) => {
         )
     };
 
+    /**
+     * Returns an array of integers to be used to display current
+     * page number and neighbors
+     * @returns array type integer
+     */
+    const getPageNumbers = () => {
+
+        const maxPages = 5;
+        const half = Math.floor(maxPages / 2);
+
+        let start = page - half;
+        let end = page + half;
+
+        if(start < 1){
+            start = 1;
+            end = Math.min(maxPages, totalPages);
+        };
+
+        if (end > totalPages) {
+        end = totalPages;
+        start = Math.max(1, totalPages - maxPages + 1);
+    }
+
+        const pages = [];
+
+        for(let i = start; i <= end; i++){            
+            pages.push(i);
+        }
+
+        return pages;
+    }
+
+    /**
+     * Navigate to business view scene with selected business info.
+     * @param businessId - id of business used to fetch info
+     */
     const viewBusiness = (businessId: string) => {
         navigation.navigate("ViewBusinessScene", {
             businessId
@@ -80,29 +127,52 @@ const BrowseBusinessScene = ({navigation, route}: props) => {
 
                                 <View style={{ margin: 3 }}>
                                     <Text style={[styles.fontMedium, { margin: 3 }]}>{item.name}</Text>
-                                    <Text style={[styles.fontRegular, {margin: 3}]}>{item.status}</Text>
-                                    <Text style={[styles.fontRegular, {margin: 3}]}>{item.subscriptionPlan}</Text>
-                                    <Text style={{fontSize:12, color: '#eee'}}>{item._id}</Text>
+                                    <Text style={[styles.fontRegular, { margin: 3 }]}>{item.status}</Text>
+                                    <Text style={[styles.fontRegular, { margin: 3 }]}>{item.subscriptionPlan}</Text>
+                                    <Text style={{ fontSize: 12, color: '#eee' }}>{item._id}</Text>
                                 </View>
 
                                 <View style={{ margin: 7, justifyContent: 'center', flexDirection: 'row', columnGap: 10 }}>
                                     <Image
-                                    source={
+                                        source={
                                             item.imageMain
-                                            ? { uri: item.imageMain }
-                                            : require('../../Utilities/AppImages/no_image.jpg')}
-                                    style={{ width: 64, height: 64, borderRadius: 10 }}
-                                    resizeMode="cover"
-                                />  
+                                                ? { uri: item.imageMain }
+                                                : require('../../Utilities/AppImages/no_image.jpg')}
+                                        style={{ width: 64, height: 64, borderRadius: 10 }}
+                                        resizeMode="cover"
+                                    />
 
-                                <TouchableOpacity onPress={()=> viewBusiness(item._id)}>
-                                <Feather name="info" size={32} color="#007AFF"/>
-                                </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => viewBusiness(item._id)}>
+                                        <Feather name="info" size={32} color="#007AFF" />
+                                    </TouchableOpacity>
                                 </View>
 
                             </View>
                         )}
                     />
+
+                    <TouchableOpacity disabled={page === 1} onPress={() => setPage(page - 1)}>
+                        <Text style={styles.fontEdit}>Prev</Text>
+                    </TouchableOpacity>
+
+                    <View style={{flexDirection: 'row', justifyContent: "center", marginTop: 20 }}>
+                        {getPageNumbers().map((p) => (
+                            <TouchableOpacity
+                                key={p}
+                                onPress={() => setPage(p)}
+                                style={{
+                                    padding: 10,
+                                    margin: 5,
+                                    backgroundColor: p === page ? "#007AFF" : "#ccc",
+                                    borderRadius: 5
+                                }}
+                            >
+                                <Text style={{ color: "white" }}>{p}</Text>
+                            </TouchableOpacity>
+                        ))}
+                    </View>
+
+
                 </View>
             </SafeAreaView>
         </SafeAreaProvider>
