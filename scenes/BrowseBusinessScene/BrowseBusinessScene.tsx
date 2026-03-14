@@ -19,6 +19,8 @@ type props = BottomTabScreenProps<RootTabParamList, 'ViewBusinessScene'>;
  */
 const BrowseBusinessScene = ({ navigation, route }: props) => {
 
+    //aws bucket base url
+    const baseUrl = `https://`
     //list of businesses
     const [businesses, setBusinesses] = useState<businessTypeShort[]>([]);
 
@@ -45,7 +47,7 @@ const BrowseBusinessScene = ({ navigation, route }: props) => {
                     token: token,
                     page: page
                 });
-
+                console.log(response);
                 setBusinesses(response.businesses);
                 setTotalPages(response.totalPages);
             } catch (err) {
