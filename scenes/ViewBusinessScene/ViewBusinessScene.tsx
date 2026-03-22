@@ -59,166 +59,182 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
         fetchBusiness();
     }, [id]);
 
+    //Navigate to profile edit scene
     const navigateToEditBusiness = () => {
         navigation.navigate("EditBusinessScene", {
             businessId: id
         })
     };
 
+    //Navigate to profile browsing scene
+    const navigateToBrowseBusiness = () => {
+        navigation.navigate("BrowseBusinessScene")
+    };
+
     return (
         <SafeAreaProvider>
             <SafeAreaView>
-                <ScrollView>
-                    {business ? (
-                        <View style={[styles.mainView, { alignContent: 'center' }]}>
-                            <TouchableOpacity style={{ alignSelf: 'flex-end', margin: 15 }} onPress={navigateToEditBusiness}>
-                                <Text style={styles.fontEdit}>
-                                    edit information
-                                </Text>
-                            </TouchableOpacity>
-                            <Image
-                                source={
-                                    business.imageMain
-                                        ? { uri: business.imageMain }
-                                        : require("../../assets/images/no-image.png")
-                                }
-                                style={viewBusinessStyles.mainImageLarge}
-                            />
+                <View style={styles.mainView}>
+                    <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+                        <TouchableOpacity style={{ alignSelf: 'flex-start', margin: 15 }} onPress={navigateToBrowseBusiness}>
+                            <Text style={styles.fontEdit}>
+                                back
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ alignSelf: 'flex-end', margin: 15 }} onPress={navigateToEditBusiness}>
+                            <Text style={styles.fontEdit}>
+                                edit information
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
 
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Text style={styles.fontMedium}>
-                                    Id: {business._id}
-                                </Text>
+                    <ScrollView>
+                        {business ? (
+                            <View style={[{ alignContent: 'center' }]}>
+                                <Image
+                                    source={
+                                        business.imageMain
+                                            ? { uri: business.imageMain }
+                                            : require("../../assets/images/no-image.png")
+                                    }
+                                    style={viewBusinessStyles.mainImageLarge}
+                                />
 
-                            </View>
-
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Text style={styles.fontMedium}>
-                                    Name: {business.name}
-                                </Text>
-
-
-                            </View>
-
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Text style={styles.fontMedium}>
-                                    Phone: {business.phone}
-                                </Text>
-
-                            </View>
-
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Text style={styles.fontMedium}>
-                                    Street: {business.street}
-                                </Text>
-                            </View>
-
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Text style={styles.fontMedium}>
-                                    City: {business.city}
-                                </Text>
-                            </View>
-
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Text style={styles.fontMedium}>
-                                    State: {business.state}
-                                </Text>
-                            </View>
-
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Text style={styles.fontMedium}>
-                                    Zipcode: {business.zipcode}
-                                </Text>
-                            </View>
-
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Text style={styles.fontMedium}>
-                                    Email: {business.email}
-                                </Text>
-                            </View>
-
-                            <View style={viewBusinessStyles.sectionView}>
-                                {business.autoRenew
-                                    ? <Text style={styles.fontMedium}>
-                                        Auto Renewal: True
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Text style={styles.fontMedium}>
+                                        Id: {business._id}
                                     </Text>
-                                    : <Text style={styles.fontMedium}>
-                                        Auto Renewal: False
+
+                                </View>
+
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Text style={styles.fontMedium}>
+                                        Name: {business.name}
                                     </Text>
-                                }
-                            </View>
 
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Text style={styles.fontMedium}>
-                                    Payment Provider: {business.paymentProvider}
-                                </Text>
-                            </View>
 
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Text style={styles.fontMedium}>
-                                    Status: {business.status}
-                                </Text>
-                            </View>
+                                </View>
 
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Text style={styles.fontMedium}>
-                                    Subscription Plan: {business.subscriptionPlan}
-                                </Text>
-                            </View>
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Text style={styles.fontMedium}>
+                                        Phone: {business.phone}
+                                    </Text>
 
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Text style={styles.fontMedium}>
-                                    Status: {business.status}
-                                </Text>
-                            </View>
+                                </View>
 
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Text style={styles.fontMedium}>
-                                    Subscription Plan: {business.subscriptionPlan}
-                                </Text>
-                            </View>
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Text style={styles.fontMedium}>
+                                        Street: {business.street}
+                                    </Text>
+                                </View>
 
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Image
-                                    source={
-                                        business.imageFirst
-                                            ? { uri: business.imageFirst }
-                                            : require("../../assets/images/no-image.png")
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Text style={styles.fontMedium}>
+                                        City: {business.city}
+                                    </Text>
+                                </View>
+
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Text style={styles.fontMedium}>
+                                        State: {business.state}
+                                    </Text>
+                                </View>
+
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Text style={styles.fontMedium}>
+                                        Zipcode: {business.zipcode}
+                                    </Text>
+                                </View>
+
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Text style={styles.fontMedium}>
+                                        Email: {business.email}
+                                    </Text>
+                                </View>
+
+                                <View style={viewBusinessStyles.sectionView}>
+                                    {business.autoRenew
+                                        ? <Text style={styles.fontMedium}>
+                                            Auto Renewal: True
+                                        </Text>
+                                        : <Text style={styles.fontMedium}>
+                                            Auto Renewal: False
+                                        </Text>
                                     }
-                                    style={viewBusinessStyles.imageSmallView}
-                                />
-                            </View>
+                                </View>
 
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Image
-                                    source={
-                                        business.imageSecond
-                                            ? { uri: business.imageSecond }
-                                            : require("../../assets/images/no-image.png")
-                                    }
-                                    style={viewBusinessStyles.imageSmallView}
-                                />
-                            </View>
-                            <View style={viewBusinessStyles.sectionView}>
-                                <Image
-                                    source={
-                                        business.imageThird
-                                            ? { uri: business.imageThird }
-                                            : require("../../assets/images/no-image.png")
-                                    }
-                                    style={viewBusinessStyles.imageSmallView}
-                                />
-                            </View>
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Text style={styles.fontMedium}>
+                                        Payment Provider: {business.paymentProvider}
+                                    </Text>
+                                </View>
 
-                        </View>
-                    ) : (
-                        <View style={[styles.mainView, { alignContent: 'center' }]}>
-                            <Text>loading</Text>
-                        </View>
-                    )
-                    }
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Text style={styles.fontMedium}>
+                                        Status: {business.status}
+                                    </Text>
+                                </View>
 
-                </ScrollView>
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Text style={styles.fontMedium}>
+                                        Subscription Plan: {business.subscriptionPlan}
+                                    </Text>
+                                </View>
+
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Text style={styles.fontMedium}>
+                                        Status: {business.status}
+                                    </Text>
+                                </View>
+
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Text style={styles.fontMedium}>
+                                        Subscription Plan: {business.subscriptionPlan}
+                                    </Text>
+                                </View>
+
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Image
+                                        source={
+                                            business.imageFirst
+                                                ? { uri: business.imageFirst }
+                                                : require("../../assets/images/no-image.png")
+                                        }
+                                        style={viewBusinessStyles.imageSmallView}
+                                    />
+                                </View>
+
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Image
+                                        source={
+                                            business.imageSecond
+                                                ? { uri: business.imageSecond }
+                                                : require("../../assets/images/no-image.png")
+                                        }
+                                        style={viewBusinessStyles.imageSmallView}
+                                    />
+                                </View>
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Image
+                                        source={
+                                            business.imageThird
+                                                ? { uri: business.imageThird }
+                                                : require("../../assets/images/no-image.png")
+                                        }
+                                        style={viewBusinessStyles.imageSmallView}
+                                    />
+                                </View>
+
+                            </View>
+                        ) : (
+                            <View style={[styles.mainView, { alignContent: 'center' }]}>
+                                <Text>loading</Text>
+                            </View>
+                        )
+                        }
+
+                    </ScrollView>
+                </View>
             </SafeAreaView>
         </SafeAreaProvider>
     )
