@@ -18,6 +18,7 @@ interface Business {
     name: string,
     email: string,
     phone: string,
+    info: string,
     state: string,
     city: string,
     street: string,
@@ -45,7 +46,7 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
 
     const id = route.params.businessId;
     const token = user.token;
-    
+
     useEffect(() => {
         const fetchBusiness = async () => {
             try {
@@ -190,6 +191,12 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                                 <View style={viewBusinessStyles.sectionView}>
                                     <Text style={styles.fontMedium}>
                                         Subscription Plan: {business.subscriptionPlan}
+                                    </Text>
+                                </View>
+
+                                <View style={viewBusinessStyles.sectionView}>
+                                    <Text style={ styles.fontMedium}>
+                                    Info: {business.info}
                                     </Text>
                                 </View>
 

@@ -47,7 +47,7 @@ const BrowseBusinessScene = ({ navigation, route }: props) => {
                     token: token,
                     page: page
                 });
-                console.log(response);
+                
                 setBusinesses(response.businesses);
                 setTotalPages(response.totalPages);
             } catch (err) {

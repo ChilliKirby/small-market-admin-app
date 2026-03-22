@@ -47,7 +47,7 @@ type FormData = Yup.InferType<typeof formSchema>;
  * Displays information for a single business
  * 
  * 
- * @param Route -> businessId: string(MongoDb _id of the business)
+ * @param route.params.businessId -> businessId: string(MongoDb _id of the business)
  *  
  * Behavior: 
  * -Fetches info of a single business
@@ -97,12 +97,15 @@ const EditBusinessScene = ({ navigation, route }: props) => {
     }, []);
 
     /**
-    * Sends edited business information to server to be saved
+    * Sends edited business information to server to be saved then
+    * navigates back to ViewBusinessScene
     */
     const submitInfo: SubmitHandler<FormData> = async (data: FormData) => {
         try {
             const response = await editBusiness({token, id, data});
-            console.log(response);
+            navigation.navigate("ViewBusinessScene",{
+                businessId: id
+            })
         } catch (error) {
             console.log(error);
         }
