@@ -31,8 +31,7 @@ interface Business {
     status: string,
     subscriptionPlan: string,
 }
-https://small-market-bucket1.s3.us-west-2.amazonaws.com/business/images/business/images/69bf606205ce0f975f8caed9_main_image
-https://small-market-bucket1.s3.us-west-2.amazonaws.com/business/images/69b05c03095fdf436fe15d51_main_image
+
 /**
  * View the profile of a business document
  * @param param0 
@@ -51,7 +50,6 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
         const fetchBusiness = async () => {
             try {
                 const response = await getBusiness({ token, id });
-                console.log(response);
                 setBusiness(response)
             } catch (error) {
                 console.log(error);
