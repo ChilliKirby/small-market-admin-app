@@ -18,15 +18,11 @@ type UpdateBusinessData = {
     data: BusinessFormData,
 }
 
-const updateBusiness = async ({ token, id, data }: UpdateBusinessData) => {
-console.log(token);
+const editBusiness = async ({ token, id, data }: UpdateBusinessData) => {
     try {
-        const response = await axios.put('http://192.168.86.123:3001/admin/business/adminupdatebusiness',
+        const response = await axios.put(`http://192.168.86.123:3001/admin/business/adminupdatebusiness/${id}`,
             data,
             {
-                params: {
-                    id: id
-                },
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
@@ -40,4 +36,4 @@ console.log(token);
     }
 };
 
-export default updateBusiness;
+export default editBusiness;

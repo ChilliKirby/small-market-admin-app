@@ -45,7 +45,7 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
 
     const id = route.params.businessId;
     const token = user.token;
-    console.log(business?.imageMain)
+    
     useEffect(() => {
         const fetchBusiness = async () => {
             try {
