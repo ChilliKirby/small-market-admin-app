@@ -24,8 +24,9 @@ const getBusiness = async({token, id}: getBusinessData) => {
         });
 
         if(response){
-            console.log(response.data.response);
-            return response.data.business
+            console.log("xxxxxxxxxxxxxx")
+            console.log(response.data);
+            return response.data.businessWithImages
         }
     } catch(error){
         console.log(error);
