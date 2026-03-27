@@ -52,6 +52,7 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
             try {
                 const response = await getBusiness({ token, id });
                 setBusiness(response)
+                console.log(business?.imageMain)
             } catch (error) {
                 console.log(error);
             }
