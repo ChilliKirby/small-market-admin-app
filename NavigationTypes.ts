@@ -9,4 +9,5 @@ export type RootTabParamList = {
         businessId: string;
     };
     EditBusinessScene: { businessId: string};
+    EditBusinessImageScene: { businessId: string};
 };

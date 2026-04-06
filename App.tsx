@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { RootTabParamList } from "./NavigationTypes";
 import AddBusinessScene from "./scenes/AddBusinessScene/AddBusinessScene";
 import BrowseBusinessScene from "./scenes/BrowseBusinessScene/BrowseBusinessScene";
+import EditBusinessImageScene from "./scenes/EditBusinessImageScene/EditBusinessImageScene";
 import EditBusinessScene from "./scenes/EditBusinessScene/EditBusinessScene";
 import HomeScene from "./scenes/HomeScene/HomeScene";
 import LoginScene from "./scenes/LoginScene/LoginScene";
@@ -31,6 +32,7 @@ export default function App() {
           <Tab.Screen name="BrowseBusinessScene" component={BrowseBusinessScene} />
           <Tab.Screen name="ViewBusinessScene" component={ViewBusinessScene} />
           <Tab.Screen name="EditBusinessScene" component={EditBusinessScene} />
+          <Tab.Screen name="EditBusinessImageScene" component={EditBusinessImageScene} />
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>

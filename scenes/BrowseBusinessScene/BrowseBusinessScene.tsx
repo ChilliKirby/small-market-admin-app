@@ -12,7 +12,7 @@ import { businessTypeShort } from "@/Utilities/BusinessTypeShort";
 import styles from "../../Styles";
 import browseBusinessSceneStyles from "./BrowseBusinessSceneStyles";
 
-type props = BottomTabScreenProps<RootTabParamList, 'ViewBusinessScene'>;
+type props = BottomTabScreenProps<RootTabParamList, 'BrowseBusinessScene'>;
 /**
  * Shows list of businesses for browsing
  * 
@@ -47,7 +47,7 @@ const BrowseBusinessScene = ({ navigation, route }: props) => {
                     token: token,
                     page: page
                 });
-                
+
                 setBusinesses(response.businesses);
                 setTotalPages(response.totalPages);
             } catch (err) {

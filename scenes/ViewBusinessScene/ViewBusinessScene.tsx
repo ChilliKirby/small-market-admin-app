@@ -102,9 +102,9 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                                     style={viewBusinessStyles.mainImageLarge}
                                 />
 
-                                <TouchableOpacity style={{alignSelf: 'center'}} onPress={}>
+                                {/* <TouchableOpacity style={{alignSelf: 'center'}} onPress={}>
                                     <Text style={ styles.fontEdit}> Edit Main image </Text>
-                                </TouchableOpacity>
+                                </TouchableOpacity> */}
 
                                 <View style={viewBusinessStyles.sectionView}>
                                     <Text style={styles.fontMedium}>
