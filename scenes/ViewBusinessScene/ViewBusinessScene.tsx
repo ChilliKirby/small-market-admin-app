@@ -73,6 +73,15 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
         navigation.navigate("BrowseBusinessScene")
     };
 
+    //Navigate to EditBusinessImage scene
+    const navigateToEditBusinessImage = (imageUri: string, imagePosition: string) => {
+        navigation.navigate("EditBusinessImageScene", {
+            businessId: id,
+            imageUri: imageUri,
+            imagePosition: imagePosition,
+        })
+    }
+
     return (
         <SafeAreaProvider>
             <SafeAreaView>
@@ -102,9 +111,9 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                                     style={viewBusinessStyles.mainImageLarge}
                                 />
 
-                                {/* <TouchableOpacity style={{alignSelf: 'center'}} onPress={}>
-                                    <Text style={ styles.fontEdit}> Edit Main image </Text>
-                                </TouchableOpacity> */}
+                                <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => navigateToEditBusinessImage(business.imageMain, "main")}>
+                                    <Text style={styles.fontEdit}> Edit Main image </Text>
+                                </TouchableOpacity>
 
                                 <View style={viewBusinessStyles.sectionView}>
                                     <Text style={styles.fontMedium}>
@@ -200,8 +209,8 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                                 </View>
 
                                 <View style={viewBusinessStyles.sectionView}>
-                                    <Text style={ styles.fontMedium}>
-                                    Info: {business.info}
+                                    <Text style={styles.fontMedium}>
+                                        Info: {business.info}
                                     </Text>
                                 </View>
 
@@ -214,6 +223,10 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                                         }
                                         style={viewBusinessStyles.imageSmallView}
                                     />
+
+                                    <TouchableOpacity onPress={() => navigateToEditBusinessImage(business.imageFirst, "first")}>
+                                        <Text style={styles.fontEdit} > Edit first image</Text>
+                                    </TouchableOpacity>
                                 </View>
 
                                 <View style={viewBusinessStyles.sectionView}>
@@ -225,7 +238,11 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                                         }
                                         style={viewBusinessStyles.imageSmallView}
                                     />
+                                    <TouchableOpacity onPress={() => navigateToEditBusinessImage(business.imageSecond, "second")}>
+                                        <Text style={styles.fontEdit} > Edit second image </Text>
+                                    </TouchableOpacity>
                                 </View>
+
                                 <View style={viewBusinessStyles.sectionView}>
                                     <Image
                                         source={
@@ -235,6 +252,9 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                                         }
                                         style={viewBusinessStyles.imageSmallView}
                                     />
+                                    <TouchableOpacity onPress={() => navigateToEditBusinessImage(business.imageThird, "third")}>
+                                        <Text style={styles.fontEdit} > Edit third image </Text>
+                                    </TouchableOpacity>
                                 </View>
 
                             </View>

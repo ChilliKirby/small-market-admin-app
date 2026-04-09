@@ -102,7 +102,7 @@ const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, m
     if (response) {
               
         if (response.status >= 200 && response.status < 300) {
-            console.log(response.data);
+            
             navigation.navigate('ViewBusinessScene', {
                 businessId: response.data.id
             });
