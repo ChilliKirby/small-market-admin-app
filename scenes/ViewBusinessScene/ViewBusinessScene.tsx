@@ -1,10 +1,11 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 
 import { RootState } from "@/store/store";
+import { useFocusEffect } from "@react-navigation/native";
 import getBusiness from "../../Controller/getBusiness";
 import { RootTabParamList } from "../../NavigationTypes";
 import styles from "../../Styles";
@@ -47,19 +48,19 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
     const id = route.params.businessId;
     const token = user.token;
 
-    useEffect(() => {
+    useFocusEffect(
+        useCallback(() =>{
         const fetchBusiness = async () => {
             try {
                 const response = await getBusiness({ token, id });
                 setBusiness(response)
-                console.log(business?.imageMain)
             } catch (error) {
                 console.log(error);
             }
         };
 
         fetchBusiness();
-    }, [id]);
+    }, [id]));
 
     //Navigate to profile edit scene
     const navigateToEditBusiness = () => {
@@ -111,7 +112,7 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                                     style={viewBusinessStyles.mainImageLarge}
                                 />
 
-                                <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => navigateToEditBusinessImage(business.imageMain, "main")}>
+                                <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => navigateToEditBusinessImage(business.imageMain, "0")}>
                                     <Text style={styles.fontEdit}> Edit Main image </Text>
                                 </TouchableOpacity>
 
@@ -124,7 +125,7 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
 
                                 <View style={viewBusinessStyles.sectionView}>
                                     <Text style={styles.fontMedium}>
-                                        Name: {business.name}
+                                        Name: {business.name} {business.imageMain} {business.imageFirst}
                                     </Text>
 
 
@@ -224,7 +225,7 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                                         style={viewBusinessStyles.imageSmallView}
                                     />
 
-                                    <TouchableOpacity onPress={() => navigateToEditBusinessImage(business.imageFirst, "first")}>
+                                    <TouchableOpacity onPress={() => navigateToEditBusinessImage(business.imageFirst, "1")}>
                                         <Text style={styles.fontEdit} > Edit first image</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -238,7 +239,7 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                                         }
                                         style={viewBusinessStyles.imageSmallView}
                                     />
-                                    <TouchableOpacity onPress={() => navigateToEditBusinessImage(business.imageSecond, "second")}>
+                                    <TouchableOpacity onPress={() => navigateToEditBusinessImage(business.imageSecond, "2")}>
                                         <Text style={styles.fontEdit} > Edit second image </Text>
                                     </TouchableOpacity>
                                 </View>
@@ -252,7 +253,7 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                                         }
                                         style={viewBusinessStyles.imageSmallView}
                                     />
-                                    <TouchableOpacity onPress={() => navigateToEditBusinessImage(business.imageThird, "third")}>
+                                    <TouchableOpacity onPress={() => navigateToEditBusinessImage(business.imageThird, "3")}>
                                         <Text style={styles.fontEdit} > Edit third image </Text>
                                     </TouchableOpacity>
                                 </View>

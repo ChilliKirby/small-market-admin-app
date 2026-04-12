@@ -5,7 +5,7 @@ type getBusinessesData = {
     page: number,
 }
 const getBusinesses = async ({token, page}: getBusinessesData) => {
-    console.log(token);
+    
     try{
         const response = await axios.get(`http://192.168.86.123:3001/admin/business/admingetbusinesses`, {
             headers: {
@@ -16,7 +16,7 @@ const getBusinesses = async ({token, page}: getBusinessesData) => {
             }
 
         })
-        console.log(response.data.businesses)
+
         if(response.data.businesses){
             return response.data
         }

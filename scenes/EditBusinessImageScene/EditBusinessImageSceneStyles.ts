@@ -11,6 +11,13 @@ const editBusinessImageSceneStyles = StyleSheet.create({
         marginBottom: 7,
         borderRadius: 7
     },
+    containerIcon: {
+        width: '100%',
+        height: width * .15,
+        marginVertical: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 });
 
 export default editBusinessImageSceneStyles;

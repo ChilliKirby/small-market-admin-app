@@ -1,10 +1,15 @@
 import { RootTabParamList } from '@/NavigationTypes';
 import { pickImage } from '@/Utilities/pickImage';
+import { Feather } from '@expo/vector-icons';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { Image, Text, View } from 'react-native';
+import { useEffect } from 'react';
+import { Alert, Image, Text, TouchableOpacity, View, } from 'react-native';
 
+import editBusinessImage from '@/Controller/editBusinessImage';
+import { RootState } from '@/store/store';
 import styles from '@/Styles';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import editBusinessImageSceneStyles from './EditBusinessImageSceneStyles';
 
 type props = BottomTabScreenProps<RootTabParamList, "EditBusinessImageScene">;
@@ -16,35 +21,73 @@ type props = BottomTabScreenProps<RootTabParamList, "EditBusinessImageScene">;
  * @param param2 -> route.params.imageUri - The image uri of the current image being used.
  * @returns 
  */
-const EditBusinessImageScene = ({route}: props) => {
-
+const EditBusinessImageScene = ({ navigation, route }: props) => {
+    
+    const token = useSelector((state: RootState) => state.admin.token);
     const [imageUri, setImageUri] = useState<string>(route.params.imageUri);
+    const [blob, setBlob] = useState<Blob | null>(null);
+    const [saveText, setSaveText] = useState(false);
+
+    useEffect(() => {
+        setImageUri(route.params.imageUri);
+    }, [route.params.imageUri]);
 
     const selectImage = async () => {
-        try{
+        try {
             const image = await pickImage();
 
-            if(image){
+            if (!image) return;
+
+             const response = await fetch(image);
+            if (image) {   
+                setBlob(await response.blob());         
                 setImageUri(image);
+                setSaveText(true);
             }
 
-        } catch(error){
+        } catch (error) {
             console.log(error);
         }
+    };
+
+    const saveImage = async () => {
+        try {
+            const response = await editBusinessImage(token, route.params.businessId, blob, imageUri, route.params.imagePosition);
+
+            if(response){
+                navigation.navigate("ViewBusinessScene", {
+                    businessId: route.params.businessId,
+                })
+            }
+            
+        } catch {
+            Alert.alert("Service unavailable");
+        }
+
     }
 
     return (
-        <View style={[styles.mainView, {alignItems: 'center' } ]}>
-            <Text style={styles.fontLarge}> Edit Business Image</Text>
+        <View style={[styles.mainView, { alignItems: 'center' }]}>
+            <Text style={styles.fontLarge}> Edit Business Image {imageUri}</Text>
 
             <Image
                 source={
-                    route.params.imageUri ? 
-                        {uri: imageUri}
-                        : require("../../assets/images/no-image.png")   
+                    imageUri ?
+                        { uri: imageUri }
+                        : require("../../assets/images/no-image.png")
                 }
                 style={editBusinessImageSceneStyles.mainImageLarge}
             />
+
+            <TouchableOpacity style={editBusinessImageSceneStyles.containerIcon} onPress={selectImage}>
+                <Feather name='camera' size={28} color="#007AFF" />
+            </TouchableOpacity>
+
+            {saveText == true &&
+                <TouchableOpacity onPress={saveImage}>
+                    <Text style={styles.fontEdit}> Save new image? </Text>
+                </TouchableOpacity>
+            }
         </View>
     )
 };
