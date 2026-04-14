@@ -1,14 +1,16 @@
 import { useEffect } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
+import GoogleSignInButton from './Components/GoogleSignInButton';
 
 
 import { RootState } from '@/store/store';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { RootTabParamList } from '../../NavigationTypes';
 import styles from '../../Styles';
-import GoogleSignInButton from './Components/GoogleSignInButton';
+import LoginSceneStyles from './LoginSceneStyles';
+
 
 type props = BottomTabScreenProps<RootTabParamList, 'LoginScene'>;
 const LoginScene = ({navigation}: props) => {
@@ -26,9 +28,11 @@ const LoginScene = ({navigation}: props) => {
     return (
         <SafeAreaProvider>
             <SafeAreaView>
-                <View style={styles.safeAreaView}>
-                    
+                <View style={styles.mainView}>
+                    <View style={LoginSceneStyles.mainContainer}>
+                        <Text style={styles.fontLarge}> Small Market </Text>
                     <GoogleSignInButton />
+                    </View>
                 </View>
             </SafeAreaView>
         </SafeAreaProvider>
