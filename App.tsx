@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 
+import { useFonts } from "expo-font";
 import { RootTabParamList } from "./NavigationTypes";
 import AddBusinessScene from "./scenes/AddBusinessScene/AddBusinessScene";
 import BrowseBusinessScene from "./scenes/BrowseBusinessScene/BrowseBusinessScene";
@@ -21,6 +22,14 @@ GoogleSignin.configure({
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 export default function App() {
+  const [loaded] = useFonts({
+    SpaceMono: require("./assets/fonts/SpaceMono-Regular.ttf"),
+  });
+
+  if(!loaded){
+    return null;
+  }
+  
   return (
     <Provider store={store}>
       <NavigationContainer>

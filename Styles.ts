@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
     fontLarge: {
         fontSize: 30,
         color: 'white',
-        margin: 50
+        margin: 50,
+        fontFamily: 'SpaceMono'
     },
     fontMedium: {
         fontSize: 22,
