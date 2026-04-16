@@ -13,6 +13,7 @@ import { pickImage } from '@/Utilities/pickImage';
 import { useSelector } from 'react-redux';
 import { RootTabParamList } from "../../NavigationTypes";
 import styles from "../../Styles";
+import Background from '../Background/Background';
 import addBusinessSceneStyles from './AddBusinessSceneStyles';
 
 
@@ -52,6 +53,11 @@ const formSchema = Yup.object({
 
 type props = BottomTabScreenProps<RootTabParamList, 'AddBusinessScene'>
 
+/**
+ * This scene allows user to submit new businesses to database
+ * @param 
+ * @returns 
+ */
 const AddBusinessScene = ({ navigation }: props) => {
 
     const user = useSelector((state: RootState) => state.admin);
@@ -60,58 +66,43 @@ const AddBusinessScene = ({ navigation }: props) => {
     const [imageUri, setImageUri] = useState<string>('');
     const [blob, setBlob] = useState<Blob | null>(null);
 
-    // const [imageUriFirst, setImageUriFirst] = useState<string>('');
-    // const [blobFirst, setBlobFirst] = useState<Blob | null>(null);
-
-    // const [imageUriSecond, setImageUriSecond] = useState<string>('');
-    // const [blobSecond, setBlobSecond] = useState<Blob | null>(null);
-
-    // const [imageUriThird, setImageUriThird] = useState<string>('');
-    // const [blobThird, setBlobThird] = useState<Blob | null>(null);
-
     /**
  * Takes data for business and uses controller to post data to database
  * @param token : string - JWT of user 
  * @param data : Formdata - business info
  */
-const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, mainImageUri: string) => {
+    const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, mainImageUri: string) => {
 
-    const response = await addBusiness({
-        //admin user info
-        token: token,
-        //Business info
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        street: data.street,
-        city: data.city,
-        state: data.state,
-        zipcode: data.zipcode,
-        website: data.website,
-        info: data.info,
-        mainImage: mainImage,
-        mainImageUri: mainImageUri,
-        // imageFirst: imageFirst,
-        // imageFirstUri: imageFirstUri,
-        // imageSecond: imageSecond,
-        // imageSecondUri: imageSecondUri,
-        // imageThird: imageThird,
-        // imageThirdUri: imageThirdUri
-    });
+        const response = await addBusiness({
+            //admin user info
+            token: token,
+            //Business info
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            street: data.street,
+            city: data.city,
+            state: data.state,
+            zipcode: data.zipcode,
+            website: data.website,
+            info: data.info,
+            mainImage: mainImage,
+            mainImageUri: mainImageUri,
 
-    if (response) {
-              
-        if (response.status >= 200 && response.status < 300) {
-            
-            navigation.navigate('ViewBusinessScene', {
-                businessId: response.data.id
-            });
-        } else{
-            console.log(response.data)
+        });
+
+        if (response) {
+
+            if (response.status >= 200 && response.status < 300) {
+
+                navigation.navigate('ViewBusinessScene', {
+                    businessId: response.data.id
+                });
+            } else {
+                console.log(response.data)
+            }
         }
     }
-}
-
 
     const {
         control,
@@ -135,192 +126,97 @@ const onSubmit = async (token: string, data: FormData, mainImage: Blob | null, m
                 setBlob(await response.blob());
                 setImageUri(image);
             }
-
-
         } catch (error) {
             console.log(error);
         }
     };
 
-    /**
-     * Allows user to set first business image
-     */
-    // const selectImageFirst = async () => {
-    //     try {
-    //         const image = await pickImage();
-    //         if (!image) return;
-
-    //         const response = await fetch(image);
-
-    //         if (response) {
-    //             setBlobFirst(await response.blob());
-    //             setImageUriFirst(image);
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-
-    /**
-    * Allows user to set Second business image
-    */
-    // const selectImageSecond = async () => {
-    //     try {
-    //         const image = await pickImage();
-    //         if (!image) return;
-
-    //         const response = await fetch(image);
-
-    //         if (response) {
-    //             setBlobSecond(await response.blob());
-    //             setImageUriSecond(image);
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-
-    /**
-    * Allows user to set Third business image
-    */
-    // const selectImageThird = async () => {
-    //     try {
-    //         const image = await pickImage();
-    //         if (!image) return;
-
-    //         const response = await fetch(image);
-
-    //         if (response) {
-    //             setBlobThird(await response.blob());
-    //             setImageUriThird(image);
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
-
     return (
-        <SafeAreaProvider>
-            <SafeAreaView>
-                <View style={[styles.mainView, { alignItems: 'center' }]}>
-                    <Text style={[styles.fontLarge, { margin: 50 }]} >
-                        Add a new business
-                    </Text>
+        <SafeAreaProvider style={{ height: "100%" }}>
+            <SafeAreaView style={{ flex: 1 }}>
+                <View style={{ flex: 1 }}>
+                    <Background>
 
-                    <ScrollView style={{ flexGrow: 1 }}>
-                        {['name', 'email', 'phone', 'street', 'city', 'state', 'zipcode', 'website'].map((field) => (
-                            <View key={field}>
-                                <Text style={styles.fontMedium}> {field} </Text>
-                                <View key={field} style={addBusinessSceneStyles.inputContainerView} >
+                        <View style={[styles.mainView, { alignItems: 'center' }]}>
+                            <Text style={[styles.fontLarge, { margin: 50 }]} >
+                                Add a new business
+                            </Text>
+
+                            <ScrollView style={{ flexGrow: 1 }}>
+                                {['name', 'email', 'phone', 'street', 'city', 'state', 'zipcode', 'website'].map((field) => (
+                                    <View key={field}>
+                                        <Text style={styles.fontMedium}> {field} </Text>
+                                        <View key={field} style={addBusinessSceneStyles.inputContainerView} >
+                                            <Controller
+                                                name={field as keyof FormData}
+                                                control={control}
+                                                render={({ field: { onChange, value, onBlur } }) => (
+                                                    <TextInput
+                                                        style={addBusinessSceneStyles.input}
+                                                        placeholder={field}
+                                                        onChangeText={onChange}
+                                                        onBlur={onBlur}
+                                                        value={value}
+                                                    />
+                                                )}
+                                            />
+                                        </View>
+
+                                        {errors[field as keyof FormData] && (
+                                            <Text style={[styles.fontErrorRegular, { marginBottom: 20 }]}>
+                                                {errors[field as keyof FormData]?.message}
+                                            </Text>
+                                        )}
+                                    </View>
+                                ))}
+
+                                <Text style={styles.fontMedium}> Business info </Text>
+                                <View style={addBusinessSceneStyles.inputContainerLargeView} >
                                     <Controller
-                                        name={field as keyof FormData}
+                                        name="info"
                                         control={control}
-                                        render={({ field: { onChange, value, onBlur } }) => (
+                                        render={({ field: { onChange, onBlur, value } }) => (
                                             <TextInput
                                                 style={addBusinessSceneStyles.input}
-                                                placeholder={field}
+                                                placeholder="Business info"
                                                 onChangeText={onChange}
                                                 onBlur={onBlur}
                                                 value={value}
                                             />
+
                                         )}
                                     />
                                 </View>
 
-                                {errors[field as keyof FormData] && (
-                                    <Text style={[styles.fontErrorRegular, { marginBottom: 20 }]}>
-                                        {errors[field as keyof FormData]?.message}
-                                    </Text>
-                                )}
-                            </View>
-                        ))}
+                                <View style={{ margin: 15, flexDirection: 'column' }}>
 
-                        <Text style={styles.fontMedium}> Business info </Text>
-                        <View style={addBusinessSceneStyles.inputContainerLargeView} >
-                            <Controller
-                                name="info"
-                                control={control}
-                                render={({ field: { onChange, onBlur, value } }) => (
-                                    <TextInput
-                                        style={addBusinessSceneStyles.input}
-                                        placeholder="Business info"
-                                        onChangeText={onChange}
-                                        onBlur={onBlur}
-                                        value={value}
-                                    />
 
-                                )}
-                            />
+                                    <Text style={styles.fontMedium}> Main Business Image </Text>
+
+                                    {imageUri ? (
+                                        <Image style={addBusinessSceneStyles.image} source={{ uri: imageUri }} />
+
+                                    ) : (
+                                        null
+                                    )}
+
+                                    <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImage}>
+                                        <Feather name="camera" size={28} color="#ffffffff" />
+                                    </TouchableOpacity>
+
+
+                                </View>
+
+                                <TouchableOpacity style={addBusinessSceneStyles.buttonView} onPress={handleSubmit((data) => onSubmit(user.token, data, blob, imageUri))}>
+                                    <View>
+                                        <Text style={styles.fontMedium}>
+                                            Submit
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </ScrollView>
                         </View>
-
-                        <View style={{ margin: 15, flexDirection: 'column' }}>
-
-
-                            <Text style={styles.fontMedium}> Main Business Image </Text>
-
-                            {imageUri ? (
-                                <Image style={addBusinessSceneStyles.image} source={{ uri: imageUri }} />
-
-                            ) : (
-                                null
-                            )}
-
-                            <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImage}>
-                                <Feather name="camera" size={28} color="#007AFF" />
-                            </TouchableOpacity>
-
-
-                            {/* <Text style={styles.fontMedium}> Business image 1 </Text>
-
-                            {imageUriFirst ? (
-                                <Image style={addBusinessSceneStyles.image} source={{ uri: imageUriFirst }} />
-                            ) : (
-                                null
-                            )} */}
-
-                            {/* <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImageFirst}>
-                                <Feather name="camera" size={28} color="#007AFF" />
-                            </TouchableOpacity> */}
-
-
-                            {/* <Text style={styles.fontMedium}> Business image 2</Text>
-
-                            {imageUriSecond ? (
-                                <Image style={addBusinessSceneStyles.image} source={{ uri: imageUriSecond }} />
-                            ) : (
-                                null
-                            )} */}
-
-                            {/* <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImageSecond}>
-                                <Feather name="camera" size={28} color="#007AFF" />
-                            </TouchableOpacity>
-
-
-                            <Text style={styles.fontMedium}> Business image 3</Text>
-
-                            {imageUriThird ? (
-                                <Image style={addBusinessSceneStyles.image} source={{ uri: imageUriThird }} />
-                            ) : (
-                                null
-                            )}
-
-                            <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImageThird}>
-                                <Feather name="camera" size={28} color="#007AFF" />
-                            </TouchableOpacity> */}
-
-
-
-                        </View>
-
-                        <TouchableOpacity style={addBusinessSceneStyles.buttonView} onPress={handleSubmit((data) => onSubmit(user.token, data, blob, imageUri))}>
-                            <View>
-                                <Text style={styles.fontMedium}>
-                                    Submit
-                                </Text>
-                            </View>
-                        </TouchableOpacity>
-                    </ScrollView>
+                    </Background>
                 </View>
             </SafeAreaView>
         </SafeAreaProvider>

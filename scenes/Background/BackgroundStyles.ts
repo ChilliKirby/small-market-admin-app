@@ -2,8 +2,10 @@ import { StyleSheet } from "react-native";
 
 const backgroundStyles = StyleSheet.create({
     containerView: {
-        position: "absolute",
-        top: 0,
+        // position: "absolute",
+        // top: 0,
+        height: "100%",
+        flex: 1,
         width: '100%',
         backgroundColor: '#3D3D3D',
     },

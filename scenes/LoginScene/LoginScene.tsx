@@ -27,8 +27,8 @@ const LoginScene = ({navigation}: props) => {
     },[token]);
 
     return (
-        <SafeAreaProvider>
-            <SafeAreaView>
+        <SafeAreaProvider style={{height:"100%"}}>
+            <SafeAreaView style={{flex:1}}>
                 <View style={{flex: 1}}>
                 <Background>
                 <View style={styles.mainView}>

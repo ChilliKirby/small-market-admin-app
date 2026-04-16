@@ -13,8 +13,8 @@ const HomeScene = ({ navigation, route }: props) => {
 
 
     return (
-        <SafeAreaProvider >
-            <SafeAreaView >
+        <SafeAreaProvider style={{height: "100%"}}>
+            <SafeAreaView style={{flex: 1}}>
                 <View style={{ flex: 1 }}>
                     <Background>
                         <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
