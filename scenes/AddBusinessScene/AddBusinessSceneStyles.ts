@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         height: 50,
         marginBottom: 5,
         backgroundColor: '#ffffff',
-        justifyContent: 'center',
+        //justifyContent: 'center',
         borderRadius: 15,
     },
     inputContainerLargeView: {
@@ -26,6 +26,9 @@ const styles = StyleSheet.create({
         borderColor: '#aaa',
         padding: 10,
         borderRadius: 5,
+        height: "100%",
+        width: "100%",
+        textAlignVertical: "top"
     },
     buttonView:{
         height: 60,

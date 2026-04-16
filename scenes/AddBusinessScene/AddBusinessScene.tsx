@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, Keyboard, ScrollView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as Yup from "yup";
 
@@ -134,6 +134,7 @@ const AddBusinessScene = ({ navigation }: props) => {
     return (
         <SafeAreaProvider style={{ height: "100%" }}>
             <SafeAreaView style={{ flex: 1 }}>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={{ flex: 1 }}>
                     <Background>
 
@@ -182,6 +183,7 @@ const AddBusinessScene = ({ navigation }: props) => {
                                                 onChangeText={onChange}
                                                 onBlur={onBlur}
                                                 value={value}
+                                                multiline
                                             />
 
                                         )}
@@ -218,6 +220,7 @@ const AddBusinessScene = ({ navigation }: props) => {
                         </View>
                     </Background>
                 </View>
+                </TouchableWithoutFeedback>
             </SafeAreaView>
         </SafeAreaProvider>
     )
