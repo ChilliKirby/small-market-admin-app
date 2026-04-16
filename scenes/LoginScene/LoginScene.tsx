@@ -9,6 +9,7 @@ import { RootState } from '@/store/store';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { RootTabParamList } from '../../NavigationTypes';
 import styles from '../../Styles';
+import Background from '../Background/Background';
 import loginSceneStyles from './LoginSceneStyles';
 
 
@@ -28,8 +29,8 @@ const LoginScene = ({navigation}: props) => {
     return (
         <SafeAreaProvider>
             <SafeAreaView>
-                {/* <View style={{flex: 1}}>
-                <Background> */}
+                <View style={{flex: 1}}>
+                <Background>
                 <View style={styles.mainView}>
                     <View style={loginSceneStyles.mainContainer}>
                         <Text style={styles.fontLarge}> Small Market </Text>
@@ -41,8 +42,8 @@ const LoginScene = ({navigation}: props) => {
                     <GoogleSignInButton />
                     </View>
                 </View>
-                {/* </Background>
-                </View> */}
+                </Background>
+                </View>
             </SafeAreaView>
         </SafeAreaProvider>
 

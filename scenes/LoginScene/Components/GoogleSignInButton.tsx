@@ -1,9 +1,10 @@
-import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import axios from 'axios';
-import { View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { useDispatch } from 'react-redux';
 
 import { setUser } from '@/store/adminSlice';
+import styles from '@/Styles';
 import { AppDispatch } from '../../../store/store';
 
 
@@ -33,42 +34,47 @@ const GoogleSignInButton = () => {
     // }
 
     const signIn = async () => {
-  try {
-    await GoogleSignin.hasPlayServices();
+        try {
+            await GoogleSignin.hasPlayServices();
 
-    const userInfo = await GoogleSignin.signIn();
+            const userInfo = await GoogleSignin.signIn();
 
-    if (!userInfo || !userInfo.data?.idToken) {
-      console.log('No user info returned');
-      return;
-    }
+            if (!userInfo || !userInfo.data?.idToken) {
+                console.log('No user info returned');
+                return;
+            }
 
-    const response = await axios.post(
-      'http://192.168.86.123:3001/auth/adminlogin',
-      {
-        idToken: userInfo.data.idToken,
-      }
-    );
+            const response = await axios.post(
+                'http://192.168.86.123:3001/auth/adminlogin',
+                {
+                    idToken: userInfo.data.idToken,
+                }
+            );
 
-    dispatch(setUser({
-      name: response.data.name,
-      token: response.data.token,
-    }));
+            dispatch(setUser({
+                name: response.data.name,
+                token: response.data.token,
+            }));
 
-    console.log(response.data);
+            console.log(response.data);
 
-  } catch (error) {
-    console.log('Google Sign-In error:', error);
-  }
-};
+        } catch (error) {
+            console.log('Google Sign-In error:', error);
+        }
+    };
 
     return (
         <View>
-            <GoogleSigninButton
+            {/* <GoogleSigninButton
                 style={{ width: 192, height: 48 }}
                 size={GoogleSigninButton.Size.Wide}
                 color={GoogleSigninButton.Color.Dark}
-                onPress={signIn} />
+                // onPress={signIn}
+                /> */}
+
+                <TouchableOpacity onPress={signIn}>
+                    <Text style={styles.fontLarge}> fhifh</Text>
+                </TouchableOpacity>
         </View>
     )
 };

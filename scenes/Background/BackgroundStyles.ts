@@ -5,6 +5,7 @@ const backgroundStyles = StyleSheet.create({
         position: "absolute",
         top: 0,
         width: '100%',
+        backgroundColor: '#3D3D3D',
     },
     wave: {
         position: "absolute",
