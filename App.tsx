@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 
 import { useFonts } from "expo-font";
+import { useEffect } from "react";
 import { RootTabParamList } from "./NavigationTypes";
 import AddBusinessScene from "./scenes/AddBusinessScene/AddBusinessScene";
 import BrowseBusinessScene from "./scenes/BrowseBusinessScene/BrowseBusinessScene";
@@ -15,13 +16,21 @@ import SearchBusinessScene from "./scenes/SearchBusinessScene/SearchBusinessScen
 import ViewBusinessScene from "./scenes/ViewBusinessScene/ViewBusinessScene";
 import { store } from "./store/store";
 
-GoogleSignin.configure({
-  webClientId: '829099996074-cd3679i82kc884vf92i5mhth92og8vll.apps.googleusercontent.com',
-  offlineAccess: true,
-})
+// GoogleSignin.configure({
+//   webClientId: '829099996074-cd3679i82kc884vf92i5mhth92og8vll.apps.googleusercontent.com',
+//   offlineAccess: true,
+// })
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 export default function App() {
+
+   useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: '829099996074-cd3679i82kc884vf92i5mhth92og8vll.apps.googleusercontent.com',
+      offlineAccess: true,
+    });
+  }, []);
+  
   const [loaded] = useFonts({
     SpaceMono: require("./assets/fonts/SpaceMono-Regular.ttf"),
   });

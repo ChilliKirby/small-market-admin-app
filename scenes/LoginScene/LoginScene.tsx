@@ -9,7 +9,7 @@ import { RootState } from '@/store/store';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { RootTabParamList } from '../../NavigationTypes';
 import styles from '../../Styles';
-import LoginSceneStyles from './LoginSceneStyles';
+import loginSceneStyles from './LoginSceneStyles';
 
 
 type props = BottomTabScreenProps<RootTabParamList, 'LoginScene'>;
@@ -28,12 +28,21 @@ const LoginScene = ({navigation}: props) => {
     return (
         <SafeAreaProvider>
             <SafeAreaView>
+                {/* <View style={{flex: 1}}>
+                <Background> */}
                 <View style={styles.mainView}>
-                    <View style={LoginSceneStyles.mainContainer}>
+                    <View style={loginSceneStyles.mainContainer}>
                         <Text style={styles.fontLarge}> Small Market </Text>
+                        <Text style={styles.fontMedium}> Admin App</Text>
+
+                        <View style={loginSceneStyles.emptySpaceView} />
+
+                        <Text style={styles.fontMedium}> Login with Google</Text>
                     <GoogleSignInButton />
                     </View>
                 </View>
+                {/* </Background>
+                </View> */}
             </SafeAreaView>
         </SafeAreaProvider>
 
