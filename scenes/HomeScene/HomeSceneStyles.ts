@@ -5,7 +5,7 @@ const screenWidth = Dimensions.get('screen').width;
 
 const styles = StyleSheet.create({
     dataBoxView: {
-        backgroundColor: '#aaaaaa',
+        backgroundColor: '#FFFFFF',
         height: screenHeight * .25,
         width: '35%',
         margin: 5,
