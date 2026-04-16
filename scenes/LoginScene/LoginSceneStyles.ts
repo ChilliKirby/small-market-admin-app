@@ -13,6 +13,17 @@ const loginSceneStyles = StyleSheet.create({
     },
     emptySpaceView: {
         height: width * 0.5
+    },
+    buttonView: {
+        height: 50,
+        width: width * 0.70,
+        borderColor: "#0940bf",
+        backgroundColor: "#FFFFFF",
+        borderWidth: 2,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontFamily: 'SpaceMono'
     }
 });
 

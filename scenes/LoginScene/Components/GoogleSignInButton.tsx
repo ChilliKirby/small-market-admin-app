@@ -6,33 +6,23 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '@/store/adminSlice';
 import styles from '@/Styles';
 import { AppDispatch } from '../../../store/store';
+import loginSceneStyles from '../LoginSceneStyles';
 
 
+/**
+ * This component returns a custom made button that signs user into the app
+ * using their Google account. 
+ * @returns Google sign in button
+ */
 const GoogleSignInButton = () => {
 
     const dispatch = useDispatch<AppDispatch>();
 
-    // const signIn = async () => {
-    //     try {
-    //         await GoogleSignin.hasPlayServices();
-    //         const userInfo: SignInResponse = await GoogleSignin.signIn();
-
-
-    //         const response = axios.post('http://192.168.86.123:3001/auth/adminlogin', {
-    //             idToken: userInfo.data?.idToken,
-    //         })
-    //             .then(response => {
-    //                 dispatch(setUser({ name: response.data.name, token: response.data.token}));
-    //                 console.log(response.data);
-    //             })
-    //             .catch(error => {
-    //                 console.log(error);
-    //             });      
-    //     } catch (error) {
-    //         console.error('Google Sign-In error:', error);
-    //     }
-    // }
-
+    /**
+     * Attempts to sign user with Google account. If successful, 
+     * sets info of store using the Google account name and JWT
+     * @returns 
+     */
     const signIn = async () => {
         try {
             await GoogleSignin.hasPlayServices();
@@ -65,16 +55,9 @@ const GoogleSignInButton = () => {
 
     return (
         <View>
-            {/* <GoogleSigninButton
-                style={{ width: 192, height: 48 }}
-                size={GoogleSigninButton.Size.Wide}
-                color={GoogleSigninButton.Color.Dark}
-                // onPress={signIn}
-                /> */}
-
-                <TouchableOpacity onPress={signIn}>
-                    <Text style={styles.fontLarge}> fhifh</Text>
-                </TouchableOpacity>
+            <TouchableOpacity onPress={signIn} style={loginSceneStyles.buttonView}>
+                <Text style={styles.fontRegularBlack}> Sign in</Text>
+            </TouchableOpacity>
         </View>
     )
 };

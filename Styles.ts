@@ -29,18 +29,38 @@ const styles = StyleSheet.create({
     fontMedium: {
         fontSize: 22,
         color: 'white',
+        fontFamily: 'SpaceMono'
     },
     fontRegular: {
         fontSize: 18,
         color: 'white',
+        fontFamily: 'SpaceMono'
+    },
+    fontLargeBlack: {
+        fontSize: 30,
+        color: 'black',
+        margin: 50,
+        fontFamily: 'SpaceMono'
+    },
+    fontMediumBlack: {
+        fontSize: 22,
+        color: 'black',
+        fontFamily: 'SpaceMono'
+    },
+    fontRegularBlack: {
+        fontSize: 18,
+        color: 'black',
+        fontFamily: 'SpaceMono'
     },
     fontErrorRegular: {
         fontSize: 18,
         color: 'red',
+        fontFamily: 'SpaceMono'
     },
     fontEdit: {
         fontSize: 18,
         color: '#ADD8E6',
+        fontFamily: 'SpaceMono'
     },
 
 
