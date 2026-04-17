@@ -31,8 +31,8 @@ type FormData = {
 };
 
 const formSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
-    email: Yup.string().email("Invalid email").default(""),
+    name: Yup.string().max(30, "Name must no exceed 30 characters.").required("Name is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
     phone: Yup.string().matches(
         /^(\+?\d{1,3}[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/,
         'Enter valid phone number'
