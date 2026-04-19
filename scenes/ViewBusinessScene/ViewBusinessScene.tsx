@@ -102,6 +102,10 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                             </TouchableOpacity>
                         </View>
 
+                        <View style={{ alignItems: 'center', width: '100%' }}>
+                            <Text style={styles.fontLarge}>Business profile</Text>
+                        </View>
+
                         <ScrollView>
                             {business ? (
                                 <View style={[{ alignContent: 'center' }]}>

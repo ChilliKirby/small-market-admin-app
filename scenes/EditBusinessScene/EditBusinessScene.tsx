@@ -112,11 +112,30 @@ const EditBusinessScene = ({ navigation, route }: props) => {
         }
     }
 
+    /**
+     * Navigates back to view business using the same 
+     * business id
+     */
+    const navigateToViewBusiness = () => {
+        navigation.navigate("ViewBusinessScene",{
+            businessId: id
+        })
+    }
+
     return (
         <SafeAreaProvider style={{ height: "100%" }}>
             <SafeAreaView style={{ flex: 1 }}>
                 <Background>
                     <View style={styles.mainView}>
+
+                        <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+                            <TouchableOpacity style={{ alignSelf: 'flex-start', margin: 15 }} onPress={navigateToViewBusiness}>
+                                <Text style={styles.fontEdit}>
+                                    back
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+
                         <Text style={[styles.fontMedium, { alignSelf: 'center' }]}> Edit Business</Text>
 
                         {business && (

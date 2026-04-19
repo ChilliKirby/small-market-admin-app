@@ -65,15 +65,29 @@ const EditBusinessImageScene = ({ navigation, route }: props) => {
         } catch {
             Alert.alert("Service unavailable");
         }
+    }
 
+    const navigateToViewBusiness = () => {
+        navigation.navigate("ViewBusinessScene", {
+            businessId: route.params.businessId,
+        })
     }
 
     return (
         <SafeAreaProvider style={{ height: "100%" }}>
             <SafeAreaView style={{ flex: 1 }}>
                 <Background>
+
+                    <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
+                        <TouchableOpacity style={{ alignSelf: 'flex-start', margin: 15 }} onPress={navigateToViewBusiness}>
+                            <Text style={styles.fontEdit}>
+                                back
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+
                     <View style={[styles.mainView, { alignItems: 'center' }]}>
-                        <Text style={styles.fontLarge}> Edit Business Image {imageUri}</Text>
+                        <Text style={styles.fontLarge}> Edit Business Image </Text>
 
                         <Image
                             source={
