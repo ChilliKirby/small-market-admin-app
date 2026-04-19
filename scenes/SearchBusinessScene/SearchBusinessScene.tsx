@@ -11,9 +11,6 @@ const SearchBusinessScene = () => {
     //Search input
     const [searchText, setSearchText] = useState(""); 
 
-    // //Number of items per page to display
-    // const itemsPerPage = 20;
-
     //Current page of business results
     const [page, setPage] = useState(1);
 
