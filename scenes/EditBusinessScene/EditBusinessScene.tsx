@@ -13,6 +13,7 @@ import { RootState } from '@/store/store';
 import styles from "@/Styles";
 import { Business } from '@/types/Business';
 import { yupResolver } from "@hookform/resolvers/yup";
+import Background from "../Background/Background";
 import editBusinessSceneStyles from "./EditBusinessSceneStyles";
 
 
@@ -102,8 +103,8 @@ const EditBusinessScene = ({ navigation, route }: props) => {
     */
     const submitInfo: SubmitHandler<FormData> = async (data: FormData) => {
         try {
-            const response = await editBusiness({token, id, data});
-            navigation.navigate("ViewBusinessScene",{
+            const response = await editBusiness({ token, id, data });
+            navigation.navigate("ViewBusinessScene", {
                 businessId: id
             })
         } catch (error) {
@@ -112,206 +113,207 @@ const EditBusinessScene = ({ navigation, route }: props) => {
     }
 
     return (
-        <SafeAreaProvider>
-            <SafeAreaView>
-                <View style={styles.mainView}>
-                    <Text style={[styles.fontMedium, { alignSelf: 'center' }]}> Edit Business</Text>
+        <SafeAreaProvider style={{ height: "100%" }}>
+            <SafeAreaView style={{ flex: 1 }}>
+                <Background>
+                    <View style={styles.mainView}>
+                        <Text style={[styles.fontMedium, { alignSelf: 'center' }]}> Edit Business</Text>
 
-                    {business && (
-                        <ScrollView style={{ flexGrow: 1 }}>
-                            <Text style={styles.fontMedium}>Business name</Text>
-                            <Controller
-                                name="name"
-                                control={control}
-                                render={({ field }) => (
-                                    <View style={editBusinessSceneStyles.inputContainerView}>
-                                        <TextInput
-                                            style={editBusinessSceneStyles.input}
-                                            placeholder={business.name}
-                                            value={field.value}
-                                            onChangeText={field.onChange}
-                                            onBlur={field.onBlur}
-                                        />
+                        {business && (
+                            <ScrollView style={{ flexGrow: 1 }}>
+                                <Text style={styles.fontMedium}>Business name</Text>
+                                <Controller
+                                    name="name"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <View style={editBusinessSceneStyles.inputContainerView}>
+                                            <TextInput
+                                                style={editBusinessSceneStyles.input}
+                                                placeholder={business.name}
+                                                value={field.value}
+                                                onChangeText={field.onChange}
+                                                onBlur={field.onBlur}
+                                            />
+                                        </View>
+                                    )}
+                                />
+                                {errors.name &&
+                                    <Text style={styles.fontErrorRegular}> {errors.name.message} </Text>
+                                }
+
+                                <Text style={styles.fontMedium}>Business email</Text>
+                                <Controller
+                                    name="email"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <View style={editBusinessSceneStyles.inputContainerView}>
+                                            <TextInput
+                                                style={editBusinessSceneStyles.input}
+                                                placeholder={business.email}
+                                                value={field.value}
+                                                onChangeText={field.onChange}
+                                                onBlur={field.onBlur}
+                                            />
+                                        </View>
+                                    )}
+                                />
+                                {errors.email &&
+                                    <Text style={styles.fontErrorRegular}> {errors.email.message} </Text>
+                                }
+
+                                <Text style={styles.fontMedium}>Business phone</Text>
+                                <Controller
+                                    name="phone"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <View style={editBusinessSceneStyles.inputContainerView}>
+                                            <TextInput
+                                                style={editBusinessSceneStyles.input}
+                                                placeholder={business.phone}
+                                                value={field.value}
+                                                onChangeText={field.onChange}
+                                                onBlur={field.onBlur}
+                                            />
+                                        </View>
+                                    )}
+                                />
+                                {errors.phone &&
+                                    <Text style={styles.fontErrorRegular}>{errors.phone.message}</Text>
+                                }
+
+                                <Text style={styles.fontMedium}>Business street</Text>
+                                <Controller
+                                    name="street"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <View style={editBusinessSceneStyles.inputContainerView}>
+                                            <TextInput
+                                                style={editBusinessSceneStyles.input}
+                                                placeholder={business.street}
+                                                value={field.value}
+                                                onChangeText={field.onChange}
+                                                onBlur={field.onBlur}
+                                            />
+                                        </View>
+                                    )}
+                                />
+                                {errors.street &&
+                                    <Text style={styles.fontErrorRegular}> {errors.street.message} </Text>
+                                }
+
+                                <Text style={styles.fontMedium}>Business city</Text>
+                                <Controller
+                                    name="city"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <View style={editBusinessSceneStyles.inputContainerView}>
+                                            <TextInput
+                                                style={editBusinessSceneStyles.input}
+                                                placeholder={business.city}
+                                                value={field.value}
+                                                onChangeText={field.onChange}
+                                                onBlur={field.onBlur}
+                                            />
+                                        </View>
+                                    )}
+                                />
+                                {errors.city &&
+                                    <Text style={styles.fontErrorRegular}> {errors.city.message} </Text>
+                                }
+
+                                <Text style={styles.fontMedium}>Business state</Text>
+                                <Controller
+                                    name="state"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <View style={editBusinessSceneStyles.inputContainerView}>
+                                            <TextInput
+                                                style={editBusinessSceneStyles.input}
+                                                placeholder={business.state}
+                                                value={field.value}
+                                                onChangeText={field.onChange}
+                                                onBlur={field.onBlur}
+                                            />
+                                        </View>
+                                    )}
+                                />
+                                {errors.state &&
+                                    <Text style={styles.fontErrorRegular}> {errors.state.message} </Text>
+                                }
+
+                                <Text style={styles.fontMedium}>Business zipcode</Text>
+                                <Controller
+                                    name="zipcode"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <View style={editBusinessSceneStyles.inputContainerView}>
+                                            <TextInput
+                                                style={editBusinessSceneStyles.input}
+                                                placeholder={business.zipcode}
+                                                value={field.value}
+                                                onChangeText={field.onChange}
+                                                onBlur={field.onBlur}
+                                            />
+                                        </View>
+                                    )}
+                                />
+                                {errors.zipcode &&
+                                    <Text style={styles.fontErrorRegular}> {errors.zipcode.message} </Text>
+                                }
+
+                                <Text style={styles.fontMedium}>Business website</Text>
+                                <Controller
+                                    name="website"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <View style={editBusinessSceneStyles.inputContainerView}>
+                                            <TextInput
+                                                style={editBusinessSceneStyles.input}
+                                                placeholder={business.website}
+                                                value={field.value}
+                                                onChangeText={field.onChange}
+                                                onBlur={field.onBlur}
+                                            />
+                                        </View>
+                                    )}
+                                />
+                                {errors.website &&
+                                    <Text style={styles.fontErrorRegular}> {errors.website.message} </Text>
+                                }
+
+                                <Text style={styles.fontMedium}>Business info</Text>
+                                <Controller
+                                    name="info"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <View style={editBusinessSceneStyles.inputContainerView}>
+                                            <TextInput
+                                                style={editBusinessSceneStyles.input}
+                                                placeholder={business.info}
+                                                value={field.value}
+                                                onChangeText={field.onChange}
+                                                onBlur={field.onBlur}
+                                            />
+                                        </View>
+                                    )}
+                                />
+                                {errors.info &&
+                                    <Text style={styles.fontErrorRegular}> {errors.info.message} </Text>
+                                }
+
+
+                                <TouchableOpacity style={styles.buttonView} onPress={handleSubmit(submitInfo)}>
+                                    <View>
+                                        <Text style={styles.fontMedium}>
+                                            Submit
+                                        </Text>
                                     </View>
-                                )}
-                            />
-                            {errors.name &&
-                                <Text style={styles.fontErrorRegular}> {errors.name.message} </Text>
-                            }
+                                </TouchableOpacity>
 
-                            <Text style={styles.fontMedium}>Business email</Text>
-                            <Controller
-                                name="email"
-                                control={control}
-                                render={({ field }) => (
-                                    <View style={editBusinessSceneStyles.inputContainerView}>
-                                        <TextInput
-                                            style={editBusinessSceneStyles.input}
-                                            placeholder={business.email}
-                                            value={field.value}
-                                            onChangeText={field.onChange}
-                                            onBlur={field.onBlur}
-                                        />
-                                    </View>
-                                )}
-                            />
-                            {errors.email &&
-                                <Text style={styles.fontErrorRegular}> {errors.email.message} </Text>
-                            }
-
-                            <Text style={styles.fontMedium}>Business phone</Text>
-                            <Controller
-                                name="phone"
-                                control={control}
-                                render={({ field }) => (
-                                    <View style={editBusinessSceneStyles.inputContainerView}>
-                                        <TextInput
-                                            style={editBusinessSceneStyles.input}
-                                            placeholder={business.phone}
-                                            value={field.value}
-                                            onChangeText={field.onChange}
-                                            onBlur={field.onBlur}
-                                        />
-                                    </View>
-                                )}
-                            />
-                            {errors.phone &&
-                                <Text style={styles.fontErrorRegular}>{errors.phone.message}</Text>
-                            }
-
-                            <Text style={styles.fontMedium}>Business street</Text>
-                            <Controller
-                                name="street"
-                                control={control}
-                                render={({ field }) => (
-                                    <View style={editBusinessSceneStyles.inputContainerView}>
-                                        <TextInput
-                                            style={editBusinessSceneStyles.input}
-                                            placeholder={business.street}
-                                            value={field.value}
-                                            onChangeText={field.onChange}
-                                            onBlur={field.onBlur}
-                                        />
-                                    </View>
-                                )}
-                            />
-                            {errors.street &&
-                                <Text style={styles.fontErrorRegular}> {errors.street.message} </Text>
-                            }
-
-                            <Text style={styles.fontMedium}>Business city</Text>
-                            <Controller
-                                name="city"
-                                control={control}
-                                render={({ field }) => (
-                                    <View style={editBusinessSceneStyles.inputContainerView}>
-                                        <TextInput
-                                            style={editBusinessSceneStyles.input}
-                                            placeholder={business.city}
-                                            value={field.value}
-                                            onChangeText={field.onChange}
-                                            onBlur={field.onBlur}
-                                        />
-                                    </View>
-                                )}
-                            />
-                            {errors.city &&
-                                <Text style={styles.fontErrorRegular}> {errors.city.message} </Text>
-                            }
-
-                            <Text style={styles.fontMedium}>Business state</Text>
-                            <Controller
-                                name="state"
-                                control={control}
-                                render={({ field }) => (
-                                    <View style={editBusinessSceneStyles.inputContainerView}>
-                                        <TextInput
-                                            style={editBusinessSceneStyles.input}
-                                            placeholder={business.state}
-                                            value={field.value}
-                                            onChangeText={field.onChange}
-                                            onBlur={field.onBlur}
-                                        />
-                                    </View>
-                                )}
-                            />
-                            {errors.state &&
-                                <Text style={styles.fontErrorRegular}> {errors.state.message} </Text>
-                            }
-
-                            <Text style={styles.fontMedium}>Business zipcode</Text>
-                            <Controller
-                                name="zipcode"
-                                control={control}
-                                render={({ field }) => (
-                                    <View style={editBusinessSceneStyles.inputContainerView}>
-                                        <TextInput
-                                            style={editBusinessSceneStyles.input}
-                                            placeholder={business.zipcode}
-                                            value={field.value}
-                                            onChangeText={field.onChange}
-                                            onBlur={field.onBlur}
-                                        />
-                                    </View>
-                                )}
-                            />
-                            {errors.zipcode &&
-                                <Text style={styles.fontErrorRegular}> {errors.zipcode.message} </Text>
-                            }
-
-                            <Text style={styles.fontMedium}>Business website</Text>
-                            <Controller
-                                name="website"
-                                control={control}
-                                render={({ field }) => (
-                                    <View style={editBusinessSceneStyles.inputContainerView}>
-                                        <TextInput
-                                            style={editBusinessSceneStyles.input}
-                                            placeholder={business.website}
-                                            value={field.value}
-                                            onChangeText={field.onChange}
-                                            onBlur={field.onBlur}
-                                        />
-                                    </View>
-                                )}
-                            />
-                            {errors.website &&
-                                <Text style={styles.fontErrorRegular}> {errors.website.message} </Text>
-                            }
-
-                            <Text style={styles.fontMedium}>Business info</Text>
-                            <Controller
-                                name="info"
-                                control={control}
-                                render={({ field }) => (
-                                    <View style={editBusinessSceneStyles.inputContainerView}>
-                                        <TextInput
-                                            style={editBusinessSceneStyles.input}
-                                            placeholder={business.info}
-                                            value={field.value}
-                                            onChangeText={field.onChange}
-                                            onBlur={field.onBlur}
-                                        />
-                                    </View>
-                                )}
-                            />
-                            {errors.info &&
-                                <Text style={styles.fontErrorRegular}> {errors.info.message} </Text>
-                            }
-
-
-                            <TouchableOpacity style={styles.buttonView} onPress={handleSubmit(submitInfo)}>
-                                <View>
-                                    <Text style={styles.fontMedium}>
-                                        Submit
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-
-                        </ScrollView>
-                    )}
-                </View>
-
+                            </ScrollView>
+                        )}
+                    </View>
+                </Background>
             </SafeAreaView>
         </SafeAreaProvider>
     )
