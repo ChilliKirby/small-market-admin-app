@@ -1,9 +1,9 @@
 import { Feather } from '@expo/vector-icons';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Image, Keyboard, ScrollView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import { FlatList, Image, Keyboard, ScrollView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as Yup from "yup";
 
@@ -11,6 +11,7 @@ import addBusiness from '@/Controller/addBusiness';
 import { RootState } from '@/store/store';
 import { pickImage } from '@/Utilities/pickImage';
 import { useSelector } from 'react-redux';
+import getBusinessCategories from '../../Controller/getBusinessCategories';
 import { RootTabParamList } from "../../NavigationTypes";
 import styles from "../../Styles";
 import Background from '../Background/Background';
@@ -49,7 +50,13 @@ const formSchema = Yup.object({
     info: Yup.string().max(500, "Info must not exceed 500 characters").default(""),
 });
 
-
+type Category = {
+    _id: string;
+    name: string;
+    slug: string;
+    color: string;
+    icon: string;
+}
 
 type props = BottomTabScreenProps<RootTabParamList, 'AddBusinessScene'>
 
@@ -61,6 +68,8 @@ type props = BottomTabScreenProps<RootTabParamList, 'AddBusinessScene'>
 const AddBusinessScene = ({ navigation }: props) => {
 
     const user = useSelector((state: RootState) => state.admin);
+
+    const [businessCategories, setBusinessCategories] = useState<Category[] | null>(null);
 
     //Main business image
     const [imageUri, setImageUri] = useState<string>('');
@@ -131,95 +140,124 @@ const AddBusinessScene = ({ navigation }: props) => {
         }
     };
 
+    useEffect(() => {
+        const fetchCategories = async () => {
+            const response = await getBusinessCategories({
+                token: user.token
+            });
+            setBusinessCategories(response.businessCategories);
+
+        }
+
+        fetchCategories();
+    }, []);
+
     return (
         <SafeAreaProvider style={{ height: "100%" }}>
             <SafeAreaView style={{ flex: 1 }}>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <View style={{ flex: 1 }}>
-                    <Background>
+                    <View style={{ flex: 1 }}>
+                        <Background>
 
-                        <View style={[styles.mainView, { alignItems: 'center' }]}>
-                            <Text style={[styles.fontLarge, { margin: 50 }]} >
-                                Add a new business
-                            </Text>
+                            <View style={[styles.mainView, { alignItems: 'center' }]}>
+                                <Text style={[styles.fontLarge, { margin: 50 }]} >
+                                    Add a new business
+                                </Text>
 
-                            <ScrollView style={{ flexGrow: 1 }}>
-                                {['name', 'email', 'phone', 'street', 'city', 'state', 'zipcode', 'website'].map((field) => (
-                                    <View key={field}>
-                                        <Text style={styles.fontMedium}> {field} </Text>
-                                        <View key={field} style={addBusinessSceneStyles.inputContainerView} >
-                                            <Controller
-                                                name={field as keyof FormData}
-                                                control={control}
-                                                render={({ field: { onChange, value, onBlur } }) => (
-                                                    <TextInput
-                                                        style={addBusinessSceneStyles.input}
-                                                        placeholder={field}
-                                                        onChangeText={onChange}
-                                                        onBlur={onBlur}
-                                                        value={value}
-                                                    />
-                                                )}
-                                            />
+                                <ScrollView style={{ flexGrow: 1 }}>
+                                    {['name', 'email', 'phone', 'street', 'city', 'state', 'zipcode', 'website'].map((field) => (
+                                        <View key={field}>
+                                            <Text style={styles.fontMedium}> {field} </Text>
+                                            <View key={field} style={addBusinessSceneStyles.inputContainerView} >
+                                                <Controller
+                                                    name={field as keyof FormData}
+                                                    control={control}
+                                                    render={({ field: { onChange, value, onBlur } }) => (
+                                                        <TextInput
+                                                            style={addBusinessSceneStyles.input}
+                                                            placeholder={field}
+                                                            onChangeText={onChange}
+                                                            onBlur={onBlur}
+                                                            value={value}
+                                                        />
+                                                    )}
+                                                />
+                                            </View>
+
+                                            {errors[field as keyof FormData] && (
+                                                <Text style={[styles.fontErrorRegular, { marginBottom: 20 }]}>
+                                                    {errors[field as keyof FormData]?.message}
+                                                </Text>
+                                            )}
                                         </View>
+                                    ))}
 
-                                        {errors[field as keyof FormData] && (
-                                            <Text style={[styles.fontErrorRegular, { marginBottom: 20 }]}>
-                                                {errors[field as keyof FormData]?.message}
+                                    <Text style={styles.fontMedium}> Business info </Text>
+                                    <View style={addBusinessSceneStyles.inputContainerLargeView} >
+                                        <Controller
+                                            name="info"
+                                            control={control}
+                                            render={({ field: { onChange, onBlur, value } }) => (
+                                                <TextInput
+                                                    style={addBusinessSceneStyles.input}
+                                                    placeholder="Business info"
+                                                    onChangeText={onChange}
+                                                    onBlur={onBlur}
+                                                    value={value}
+                                                    multiline
+                                                />
+
+                                            )}
+                                        />
+                                    </View>
+
+
+                                    <View style={addBusinessSceneStyles.inputContainerLargeView}>
+                                        <FlatList
+                                            horizontal
+                                            data={businessCategories}
+                                            renderItem={({ item }) => (
+                                                <TouchableOpacity
+                                                    onPress={() => console.log("tapped")}
+                                                >
+                                                    <Text style={styles.fontMediumBlack}>{item.name}</Text>
+                                                </TouchableOpacity>
+                                            )}
+                                        />
+
+                                    </View>
+
+
+                                    <View style={{ margin: 15, flexDirection: 'column' }}>
+
+
+                                        <Text style={styles.fontMedium}> Main Business Image </Text>
+
+                                        {imageUri ? (
+                                            <Image style={addBusinessSceneStyles.image} source={{ uri: imageUri }} />
+
+                                        ) : (
+                                            null
+                                        )}
+
+                                        <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImage}>
+                                            <Feather name="camera" size={28} color="#ffffffff" />
+                                        </TouchableOpacity>
+
+
+                                    </View>
+
+                                    <TouchableOpacity style={addBusinessSceneStyles.buttonView} onPress={handleSubmit((data) => onSubmit(user.token, data, blob, imageUri))}>
+                                        <View>
+                                            <Text style={styles.fontMedium}>
+                                                Submit
                                             </Text>
-                                        )}
-                                    </View>
-                                ))}
-
-                                <Text style={styles.fontMedium}> Business info </Text>
-                                <View style={addBusinessSceneStyles.inputContainerLargeView} >
-                                    <Controller
-                                        name="info"
-                                        control={control}
-                                        render={({ field: { onChange, onBlur, value } }) => (
-                                            <TextInput
-                                                style={addBusinessSceneStyles.input}
-                                                placeholder="Business info"
-                                                onChangeText={onChange}
-                                                onBlur={onBlur}
-                                                value={value}
-                                                multiline
-                                            />
-
-                                        )}
-                                    />
-                                </View>
-
-                                <View style={{ margin: 15, flexDirection: 'column' }}>
-
-
-                                    <Text style={styles.fontMedium}> Main Business Image </Text>
-
-                                    {imageUri ? (
-                                        <Image style={addBusinessSceneStyles.image} source={{ uri: imageUri }} />
-
-                                    ) : (
-                                        null
-                                    )}
-
-                                    <TouchableOpacity style={addBusinessSceneStyles.iconButtonView} onPress={selectImage}>
-                                        <Feather name="camera" size={28} color="#ffffffff" />
+                                        </View>
                                     </TouchableOpacity>
-
-
-                                </View>
-
-                                <TouchableOpacity style={addBusinessSceneStyles.buttonView} onPress={handleSubmit((data) => onSubmit(user.token, data, blob, imageUri))}>
-                                    <View>
-                                        <Text style={styles.fontMedium}>
-                                            Submit
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                            </ScrollView>
-                        </View>
-                    </Background>
-                </View>
+                                </ScrollView>
+                            </View>
+                        </Background>
+                    </View>
                 </TouchableWithoutFeedback>
             </SafeAreaView>
         </SafeAreaProvider>
