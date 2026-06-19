@@ -8,9 +8,12 @@ import { useEffect } from "react";
 import { RootTabParamList } from "./NavigationTypes";
 import AddBusinessScene from "./scenes/AddBusinessScene/AddBusinessScene";
 import BrowseBusinessScene from "./scenes/BrowseBusinessScene/BrowseBusinessScene";
+import EditBusinessImageScene from "./scenes/EditBusinessImageScene/EditBusinessImageScene";
+import EditBusinessScene from "./scenes/EditBusinessScene/EditBusinessScene";
 import HomeScene from "./scenes/HomeScene/HomeScene";
 import LoginScene from "./scenes/LoginScene/LoginScene";
 import SearchBusinessScene from "./scenes/SearchBusinessScene/SearchBusinessScene";
+import ViewBusinessScene from "./scenes/ViewBusinessScene/ViewBusinessScene";
 import { store } from "./store/store";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
@@ -42,10 +45,10 @@ export default function App() {
           <Tab.Screen name="BrowseBusinessScene" component={BrowseBusinessScene} />
 
 
-          {/* These tabs are for debugging only */}
-          {/* <Tab.Screen name="ViewBusinessScene" component={ViewBusinessScene} />
+         
+          <Tab.Screen name="ViewBusinessScene" component={ViewBusinessScene} />
           <Tab.Screen name="EditBusinessScene" component={EditBusinessScene} />
-          <Tab.Screen name="EditBusinessImageScene" component={EditBusinessImageScene} /> */}
+          <Tab.Screen name="EditBusinessImageScene" component={EditBusinessImageScene} />
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>
