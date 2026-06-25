@@ -52,6 +52,16 @@ const styles = StyleSheet.create({
         width: width * .3,
         height: width * .2,
         marginVertical: 10
+    },
+    chipWrapView:{
+        flexDirection: "row",
+        flexWrap: "wrap"
+    },
+    chipView:{
+        paddingHorizontal: 12,
+        paddingVertical: 8,
+        borderRadius: 16,
+        margin: 4,
     }
 })
 

@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { FlatList, Image, Keyboard, ScrollView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import { Image, Keyboard, ScrollView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as Yup from "yup";
 
@@ -153,7 +153,6 @@ const AddBusinessScene = ({ navigation }: props) => {
                 token: user.token
             });
             setBusinessCategories(response.businessCategories);
-
         }
 
         fetchCategories();
@@ -228,18 +227,18 @@ const AddBusinessScene = ({ navigation }: props) => {
                                     </View>
 
 
-                                    <View style={addBusinessSceneStyles.inputContainerLargeView}>
-                                        <FlatList
-                                            horizontal
-                                            data={businessCategories}
-                                            renderItem={({ item }) => (
-                                                <TouchableOpacity
-                                                    onPress={() => console.log("tapped")}
-                                                >
+                                    <View style={addBusinessSceneStyles.chipWrapView}>
+                                        {businessCategories.map((item) => (
+                                            <TouchableOpacity
+                                                key={item.slug}
+                                                onPress={() => toggleCategory(item.slug)}
+                                            >
+                                                <View style={[addBusinessSceneStyles.chipView , {backgroundColor: selectedCategories.includes(item.slug) ? "#87CEEB" : "#ffffff"}]}>
                                                     <Text style={styles.fontMediumBlack}>{item.name}</Text>
-                                                </TouchableOpacity>
-                                            )}
-                                        />
+                                                </View>
+                                            </TouchableOpacity>
+                                        ))}
+
 
                                     </View>
 
