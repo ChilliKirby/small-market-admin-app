@@ -17,7 +17,18 @@ import styles from "../../Styles";
 import Background from '../Background/Background';
 import addBusinessSceneStyles from './AddBusinessSceneStyles';
 
+const textFields = [
+  "name",
+  "email",
+  "phone",
+  "street",
+  "city",
+  "state",
+  "zipcode",
+  "website",
+] as const;
 
+type TextField = typeof textFields[number];
 
 type FormData = {
     name: string;
@@ -29,6 +40,7 @@ type FormData = {
     zipcode: string;
     website: string;
     info: string;
+    categories: string[],
 };
 
 const formSchema = Yup.object({
@@ -48,6 +60,10 @@ const formSchema = Yup.object({
             'Enter a valid website (ex: smallmarket.com)'
         ).default(""),
     info: Yup.string().max(500, "Info must not exceed 500 characters").default(""),
+    categories: Yup.array()
+    .of(Yup.string().required())
+    .min(1, "Select at least one category")
+    .required(),
 });
 
 type Category = {
@@ -120,6 +136,7 @@ const AddBusinessScene = ({ navigation }: props) => {
     const {
         control,
         handleSubmit,
+        setValue,
         formState: { errors },
     } = useForm<FormData>({
         resolver: yupResolver(formSchema),
@@ -163,8 +180,12 @@ const AddBusinessScene = ({ navigation }: props) => {
      */
     const toggleCategory = (slug: string) => {
         setSelectedCategories((prev) => {
-            return prev.includes(slug) ? prev.filter((c) => c !== slug) : [...prev, slug]
-        })
+            const next = prev.includes(slug) ? prev.filter((c) => c !== slug) : [...prev, slug];
+            setValue("categories", next);
+            return next;
+        });
+
+
     }
 
     return (
@@ -180,12 +201,12 @@ const AddBusinessScene = ({ navigation }: props) => {
                                 </Text>
 
                                 <ScrollView style={{ flexGrow: 1 }}>
-                                    {['name', 'email', 'phone', 'street', 'city', 'state', 'zipcode', 'website'].map((field) => (
+                                    {textFields.map((field) => (
                                         <View key={field}>
                                             <Text style={styles.fontMedium}> {field} </Text>
                                             <View key={field} style={addBusinessSceneStyles.inputContainerView} >
                                                 <Controller
-                                                    name={field as keyof FormData}
+                                                    name={field as TextField}
                                                     control={control}
                                                     render={({ field: { onChange, value, onBlur } }) => (
                                                         <TextInput
@@ -193,13 +214,13 @@ const AddBusinessScene = ({ navigation }: props) => {
                                                             placeholder={field}
                                                             onChangeText={onChange}
                                                             onBlur={onBlur}
-                                                            value={value}
+                                                            value={value ?? ""}
                                                         />
                                                     )}
                                                 />
                                             </View>
 
-                                            {errors[field as keyof FormData] && (
+                                            {errors[field] && (
                                                 <Text style={[styles.fontErrorRegular, { marginBottom: 20 }]}>
                                                     {errors[field as keyof FormData]?.message}
                                                 </Text>
