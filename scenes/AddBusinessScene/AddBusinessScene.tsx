@@ -69,7 +69,11 @@ const AddBusinessScene = ({ navigation }: props) => {
 
     const user = useSelector((state: RootState) => state.admin);
 
-    const [businessCategories, setBusinessCategories] = useState<Category[] | null>(null);
+    //List of all categories
+    const [businessCategories, setBusinessCategories] = useState<Category[]>([]);
+
+    //List of user selected categories
+    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
     //Main business image
     const [imageUri, setImageUri] = useState<string>('');
@@ -140,6 +144,9 @@ const AddBusinessScene = ({ navigation }: props) => {
         }
     };
 
+    /**
+     * Fetch available categories to be selected from 
+     */
     useEffect(() => {
         const fetchCategories = async () => {
             const response = await getBusinessCategories({
@@ -151,6 +158,15 @@ const AddBusinessScene = ({ navigation }: props) => {
 
         fetchCategories();
     }, []);
+
+    /**
+     * Toggle category icon and add category to business
+     */
+    const toggleCategory = (slug: string) => {
+        setSelectedCategories((prev) => {
+            return prev.includes(slug) ? prev.filter((c) => c !== slug) : [...prev, slug]
+        })
+    }
 
     return (
         <SafeAreaProvider style={{ height: "100%" }}>
