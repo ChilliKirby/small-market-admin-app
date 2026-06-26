@@ -20,9 +20,10 @@ type BusiniessData = {
     imageSecondUri?: string;
     imageThird?: Blob | null;
     imageThirdUri?: string;
+    categories: string[];
 }
 
-const addBusiness = async ({ token, name, email, phone, street, city, state, zipcode, website, info, mainImage, mainImageUri, imageFirst, imageFirstUri, imageSecond, imageSecondUri, imageThird, imageThirdUri }: BusiniessData) => {
+const addBusiness = async ({ token, name, email, phone, street, city, state, zipcode, website, info, mainImage, mainImageUri, imageFirst, imageFirstUri, imageSecond, imageSecondUri, imageThird, imageThirdUri, categories }: BusiniessData) => {
 
     const formData = new FormData();
 
@@ -81,6 +82,12 @@ const addBusiness = async ({ token, name, email, phone, street, city, state, zip
     if (info) {
         formData.append('info', info);
     };
+    
+    if(categories.length > 0){
+        categories.forEach((category) => {
+            formData.append("categories", category);
+        })
+    }
 
     try {
 

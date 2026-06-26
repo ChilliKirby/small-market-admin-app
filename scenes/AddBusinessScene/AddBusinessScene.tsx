@@ -117,7 +117,7 @@ const AddBusinessScene = ({ navigation }: props) => {
             info: data.info,
             mainImage: mainImage,
             mainImageUri: mainImageUri,
-
+            categories: data.categories
         });
 
         if (response) {
@@ -181,7 +181,9 @@ const AddBusinessScene = ({ navigation }: props) => {
     const toggleCategory = (slug: string) => {
         setSelectedCategories((prev) => {
             const next = prev.includes(slug) ? prev.filter((c) => c !== slug) : [...prev, slug];
+            console.log(next);
             setValue("categories", next);
+            
             return next;
         });
 
