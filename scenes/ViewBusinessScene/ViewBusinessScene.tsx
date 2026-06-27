@@ -55,11 +55,12 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                 try {
                     const response = await getBusiness({ token, id });
                     setBusiness(response)
+                    console.log(response)
                 } catch (error) {
                     console.log(error);
                 }
             };
-
+            
             fetchBusiness();
         }, [id]));
 

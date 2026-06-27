@@ -88,7 +88,7 @@ const addBusiness = async ({ token, name, email, phone, street, city, state, zip
             formData.append("categories", category);
         })
     }
-
+console.log(formData)
     try {
 
         const response = await axios.post('http://192.168.86.123:3001/admin/business/addbusiness', formData, {
