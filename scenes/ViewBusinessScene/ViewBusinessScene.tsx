@@ -33,6 +33,7 @@ interface Business {
     paymentProvider: string,
     status: string,
     subscriptionPlan: string,
+    categoryIds: [string],
 }
 
 /**
@@ -60,7 +61,7 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                     console.log(error);
                 }
             };
-            
+
             fetchBusiness();
         }, [id]));
 
@@ -220,6 +221,14 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
                                         <Text style={styles.fontMedium}>
                                             Info: {business.info}
                                         </Text>
+                                    </View>
+
+                                    <View style={viewBusinessStyles.sectionView}>
+                                        <Text style={styles.fontMedium}>Categories:</Text>
+                                    </View>
+
+                                    <View style={[viewBusinessStyles.sectionView, {flexWrap: 'wrap'}]}>
+                                        {business.categoryIds.map(category => <Text style={styles.fontMedium}>{category}</Text>)}
                                     </View>
 
                                     <View style={viewBusinessStyles.sectionView}>
