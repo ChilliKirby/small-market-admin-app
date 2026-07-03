@@ -1,11 +1,11 @@
-#Small Market Admin
+# Small Market Admin
 
-##Overview
+## Overview
 
 Small Market Admin is a React Native app used to manage the Small Market platform. It allowes users to create, edit, and manage business listings that are displayed in the client app.
 This app is intended for administration use only and is not available for general use.
 
-##Features
+## Features
 
 - Add new businesses
 - Edit existing businesses
@@ -16,7 +16,7 @@ This app is intended for administration use only and is not available for genera
 - Authenticate administrators
 - Communicate with the Small Market backend via REST APIs
 
-##Technology Stack
+## Technology Stack
 
 - React Native
 - Expo
@@ -40,10 +40,10 @@ npm install
 ## Environment Variables
 Create a `.env` file 
 
-##Backend
+## Backend
 This application communicates with the Small Market app for authentication and business management.
 
-##Images 
+## Images 
 Images are stored in AWS S3 and the url in MongoDB.
 
 
