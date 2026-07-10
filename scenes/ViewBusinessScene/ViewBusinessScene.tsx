@@ -133,7 +133,7 @@ const ViewBusinessScene = ({ navigation, route }: props) => {
 
                                     <View style={viewBusinessStyles.sectionView}>
                                         <Text style={styles.fontMedium}>
-                                            Name: {business.name} {business.imageMain} {business.imageFirst}
+                                            Name: {business.name}
                                         </Text>
 
 

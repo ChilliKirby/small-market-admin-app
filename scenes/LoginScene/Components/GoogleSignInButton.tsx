@@ -46,8 +46,6 @@ const GoogleSignInButton = () => {
                 token: response.data.token,
             }));
 
-            console.log(response.data);
-
         } catch (error) {
             console.log('Google Sign-In error:', error);
         }

@@ -1,7 +1,7 @@
 import { Feather } from '@expo/vector-icons';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Image, Keyboard, ScrollView, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -11,7 +11,6 @@ import addBusiness from '@/Controller/addBusiness';
 import { RootState } from '@/store/store';
 import { pickImage } from '@/Utilities/pickImage';
 import { useSelector } from 'react-redux';
-import getBusinessCategories from '../../Controller/getBusinessCategories';
 import { RootTabParamList } from "../../NavigationTypes";
 import styles from "../../Styles";
 import Background from '../Background/Background';
@@ -86,8 +85,8 @@ const AddBusinessScene = ({ navigation }: props) => {
     const user = useSelector((state: RootState) => state.admin);
 
     //List of all categories
-    const [businessCategories, setBusinessCategories] = useState<Category[]>([]);
-
+    const businessCategories = useSelector((state:RootState) => state.categories.categories);
+   
     //List of user selected categories
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
@@ -161,19 +160,19 @@ const AddBusinessScene = ({ navigation }: props) => {
         }
     };
 
-    /**
-     * Fetch available categories to be selected from 
-     */
-    useEffect(() => {
-        const fetchCategories = async () => {
-            const response = await getBusinessCategories({
-                token: user.token
-            });
-            setBusinessCategories(response.businessCategories);
-        }
+    // /**
+    //  * Fetch available categories to be selected from 
+    //  */
+    // useEffect(() => {
+    //     const fetchCategories = async () => {
+    //         const response = await getBusinessCategories({
+    //             token: user.token
+    //         });
+    //         setBusinessCategories(response.businessCategories);
+    //     }
 
-        fetchCategories();
-    }, []);
+    //     fetchCategories();
+    // }, []);
 
     /**
      * Toggle category icon and add category to business

@@ -1,16 +1,41 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { ScrollView, StatusBar, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch, useSelector } from "react-redux";
 
+import getBusinessCategories from "@/Controller/getBusinessCategories";
+import { setCategories } from "@/store/categorySlice";
+import { RootState } from "@/store/store";
+import { useEffect } from "react";
 import { RootTabParamList } from "../../NavigationTypes";
 import styles from "../../Styles";
 import Background from "../Background/Background";
 import homeSceneStyles from './HomeSceneStyles';
 
 
+
 type props = BottomTabScreenProps<RootTabParamList, 'HomeScene'>;
+
+
 const HomeScene = ({ navigation, route }: props) => {
 
+    const dispatch = useDispatch();
+
+    const token = useSelector((state: RootState) => state.admin.token);
+
+    useEffect(() => {
+        const loadCategories = async () => {
+            let response = await getBusinessCategories({
+                token: token,
+            });
+            
+            dispatch(setCategories({
+                categories: response.businessCategories
+            }))
+        }
+
+        loadCategories();
+    })
 
     return (
         <SafeAreaProvider style={{height: "100%"}}>
