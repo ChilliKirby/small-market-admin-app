@@ -1,50 +1,50 @@
-# Welcome to your Expo app 👋
+# Small Market Admin
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Overview
 
-## Get started
+Small Market Admin is a React Native app used to manage the Small Market platform. It allowes users to create, edit, and manage business listings that are displayed in the client app.
+This app is intended for administration use only and is not available for general use.
 
-1. Install dependencies
+## Features
 
-   ```bash
-   npm install
-   ```
+- Add new businesses
+- Edit existing businesses
+- Delete businesses
+- Upload and replace business images
+- Manage business categories
+- Search businesses
+- Authenticate administrators
+- Communicate with the Small Market backend via REST APIs
 
-2. Start the app
+## Technology Stack
 
-   ```bash
-   npx expo start
-   ```
+- React Native
+- Expo
+- JavaScript
+- Node.js backend
+- MongoDB
+- AWS S3 for image storage
 
-In the output, you'll find options to open the app in a
+## Screens
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+-Login
+-Business List
+-Add Business
+-Edit Business
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+##Installation
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Environment Variables
+Create a `.env` file 
 
-## Learn more
+## Backend
+This application communicates with the Small Market app for authentication and business management.
 
-To learn more about developing your project with Expo, look at the following resources:
+## Images 
+Images are stored in AWS S3 and the url in MongoDB.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## Join the community
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
