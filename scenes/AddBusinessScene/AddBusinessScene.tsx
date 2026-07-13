@@ -180,7 +180,7 @@ const AddBusinessScene = ({ navigation }: props) => {
     const toggleCategory = (slug: string) => {
         setSelectedCategories((prev) => {
             const next = prev.includes(slug) ? prev.filter((c) => c !== slug) : [...prev, slug];
-            console.log(next);
+            
             setValue("categories", next);
             
             return next;
@@ -248,7 +248,7 @@ const AddBusinessScene = ({ navigation }: props) => {
                                         />
                                     </View>
 
-
+                                    {businessCategories && 
                                     <View style={addBusinessSceneStyles.chipWrapView}>
                                         {businessCategories.map((item) => (
                                             <TouchableOpacity
@@ -260,9 +260,8 @@ const AddBusinessScene = ({ navigation }: props) => {
                                                 </View>
                                             </TouchableOpacity>
                                         ))}
-
-
                                     </View>
+}
 
 
                                     <View style={{ margin: 15, flexDirection: 'column' }}>
